@@ -10,7 +10,7 @@ window.addEventListener('keydown', playsound);
 
 2. 重置 音频开始播放时间 `audio.currentTime = num`
 3. 利用`selector.classList.add('playing')`，添加样式类；同理用`selector.classList.remove('playing')`移除样式类。
-4. `transitionend`事件类型:  `transition`结束的事件  執行callback內容。
+4. `transitionend`事件类型:  `transition`结束的事件  执行callback内容。
 
 ### 补充
 
