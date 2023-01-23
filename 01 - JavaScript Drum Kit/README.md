@@ -8,7 +8,7 @@ window.addEventListener('keydown', playsound);
 
 
 1. 通过 按键事件`keydown`事件类型 触发函数，
-利用每个按键的`event.code`值，和 属性选择器`audio[data-key="${e.code}"]` 找到相应的audio元素，播放对应音频`audio.play()`。
+- 利用每个按键的`event.code`值，和 属性选择器`audio[data-key="${e.code}"]` 找到相应的audio元素，播放对应音频`audio.play()`。
 
 2. 重置 音频开始播放时间 `audio.currentTime = num`
 3. `transitionend`事件类型:  `transition`结束的事件  执行callback内容。
