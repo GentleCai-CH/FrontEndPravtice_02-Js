@@ -1,3 +1,11 @@
+<!--
+ * @Author: GentleCai-CH 2406756724@qq.com
+ * @Date: 2023-01-22 22:59:47
+ * @LastEditors: GentleCai-CH 2406756724@qq.com
+ * @LastEditTime: 2023-01-24 22:47:29
+ * @FilePath: \JavaScript30\03 - CSS Variables\index-FINISHED.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,7 +13,7 @@
   <title>Scoped CSS Variables and JS</title>
 </head>
 <body>
-  <h2>Update CSS Variables with <span class='hl'>JS</span></h2>
+  <h2>Update CSS Variables with <span class='tail'>JS</span></h2>
 
   <div class="controls">
     <label for="spacing">Spacing:</label>
@@ -21,23 +29,10 @@
   <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
 
   <style>
-    :root {
-      --base: #ffc600;
-      --spacing: 10px;
-      --blur: 10px;
-    }
-
-    img {
-      padding: var(--spacing);
-      background: var(--base);
-      filter: blur(var(--blur));
-    }
-
-    .hl {
-      color: var(--base);
-    }
+    
 
     /*
+    杂项样式
       misc styles, nothing to do with CSS variables
     */
 
@@ -57,18 +52,36 @@
     input {
       width: 100px;
     }
+
+
+    :root {
+      --base: #ffc600;
+      --spacing: 10px;
+      --blur: 10px;
+    }
+
+    img {
+      padding: var(--spacing);
+      background: var(--base);
+      filter: blur(var(--blur));
+    }
+
+    .tail {
+      color: var(--base);
+    }
   </style>
 
   <script>
     const inputs = document.querySelectorAll('.controls input');
+
+    inputs.forEach(input => input.addEventListener('change', handleUpdate));
+    inputs.forEach(input => input.addEventListener('mousemove', handleUpdate));
 
     function handleUpdate() {
       const suffix = this.dataset.sizing || '';
       document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
     }
 
-    inputs.forEach(input => input.addEventListener('change', handleUpdate));
-    inputs.forEach(input => input.addEventListener('mousemove', handleUpdate));
   </script>
 
 
