@@ -1,7 +1,7 @@
 
 # JS&CSS CLOCK
 
-## 摘要
+## 重点
 
 1. 设置 旋转中心 `transform-origin:100%`
 	- 横线会以中心点当做轴心旋转(50%)，使用`transform-origin:100%`移动 轴心到最右侧（100%）。
