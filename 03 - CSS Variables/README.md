@@ -3,7 +3,7 @@
 
 ## 重点
 
-1. 利用Javascript抓取的量(使用`change`监听颜色改变及`mousemove`事件监听range改变)，并更新css改变值。
+1. 利用Javascript抓取改变的量(使用`change`监听颜色改变及`mousemove`事件监听range改变)，并更新css改变值。
 
 2.  `this.dataset-xxx`
 	- 选择所有`data-xxx`前缀的属性及其值。
