@@ -3,13 +3,13 @@
 
 ## 重点
 
-1. 利用Javascript抓取的量(使用change监听颜色改变及mousemove事件监听range改变)，并更新css改变值。
+1. 利用Javascript抓取的量(使用`change`监听颜色改变及`mousemove`事件监听range改变)，并更新css改变值。
 
 2.  `this.dataset-xxx`
 	- 选择所有`data-xxx`前缀的属性及其值。
 	- 如使用`this.dataset.sizing`选择`data-sizing`属性的值，`data-sizing`存放的是`px`，因为取到值后需要加上单位`px`，颜色没有单位，所以也可以为空，避免报错。
 
-3. document.documentElement指的是，调用该回调的元素
+3. `document.documentElement`指的是，调用该回调的元素
 ```
 function updateData(e){
     const suffix = this.dataset.sizing || ' ';
@@ -17,8 +17,8 @@ function updateData(e){
 }
 ```
 
-4. NodeList vs Array:
-	- 使用`querySelectorAll('.controls input')`时会返回NodeList,，但是它不是Array， 可以使用`forEach` 方法，不能使用像是map, reduce等方法。
+4. `NodeList` vs Array:
+	- 使用`querySelectorAll('.controls input')`时会返回`NodeList`,，但是它不是Array， 可以使用`forEach` 方法，不能使用像是map, reduce等方法。
 ```
 <div class="controls">
 	<input >
@@ -59,4 +59,4 @@ img{
 <label for="base">Base Color</label>
 <input id="base" type="color" name="base" value="#ffc600">
 ```
-4. filter:blur()滤镜，常见的还有opacity(透明度)。
+4. `filter:blur()`滤镜，常见的还有`opacity`(透明度)。
