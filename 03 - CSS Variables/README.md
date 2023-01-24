@@ -3,10 +3,22 @@
 
 ## 重点
 
-1. 利用Javascript抓取改變的量(使用change監聽顏色改變及mouseover事件監聽range)，並更新CSS的變數值。
+1. 利用Javascript抓取的量(使用change监听颜色改变及mousemove事件监听range改变)，并更新css改变值。
+
+2.  `this.dataset-xxx`
+	- 选择所有`data-xxx`前缀的属性及其值。
+	- 如使用`this.dataset.sizing`选择`data-sizing`属性的值，`data-sizing`存放的是`px`，因为取到值后需要加上单位`px`，颜色没有单位，所以也可以为空，避免报错。
+
+3. document.documentElement指的是，调用该回调的元素
+```
+function updateData(e){
+    const suffix = this.dataset.sizing || ' ';
+    document.documentElement.style.setProperty(`--${this.name}`,this.value + suffix);
+}
+```
 
 4. NodeList vs Array:
-	- 使用`querySelectorAll('.controls input')`时会返回NodeList,，但是它不是一個Array， 可以使用`forEach` 方法，不能使用像是map, reduce等方法。
+	- 使用`querySelectorAll('.controls input')`时会返回NodeList,，但是它不是Array， 可以使用`forEach` 方法，不能使用像是map, reduce等方法。
 ```
 <div class="controls">
 	<input >
@@ -14,14 +26,6 @@
 	<input >
 ```
 
-5. `this.dataset`:會出現該選取項目中所有`data-`的項目及值。舉例來說，如果要選取`data-sizing`的值，可以使用`this.dataset.sizing`，在範例中，`data-sizing`存放的是`px`，所以在取到目標的值之後，還需要加上`px`值才可以運作，不過顏色沒有單位，所以也可以為空，避免報錯。
-
-```
-function updateData(e){
-    const suffix = this.dataset.sizing || ' ';
-    document.documentElement.style.setProperty(`--${this.name}`,this.value + suffix);
-}
-```
 
 ## 补充
 
