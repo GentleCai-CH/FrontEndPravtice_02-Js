@@ -3,10 +3,13 @@
 
 ## 摘要
 
-1. 橫線使用`transform:rotate(90deg)`會變成直線，預設情況下，會以中心點當作軸心旋轉(50%)，若要移動軸心則要使用`transform-origin:100%`(最右側)。
-2. `transition-timing-function:ease`可當作動畫的呈現效果。
-3. 設置每次執行時間`setInterval(setDate, 1000)`，設置每次執行時的內容。
-4. 取時間使用`now = new Date()`, 可以取得的分秒時`now.getSeconds()`。
+1. 设置 旋转中心 `transform-origin:100%`
+	- 横线会以中心点当做轴心旋转(50%)，使用`transform-origin:100%`移动 轴心到最右侧（100%）。
+	- 横线使用`transform:rotate(90deg)`变成竖线，其坐标轴跟随旋转，因此旋转中心依旧有效。
+2. 使用日期对象`now = new Date()`
+	- 使用日期对象取得当前时间`now = new Date()`, 使用`now.getHours()`方法、`now.getMinutes()`方法、`now.getSeconds()`方法取得时分秒,再计算相应的旋转角度。
+3. 使用`setInterval()`定时执行函数`setInterval(setDate, 1000);`
+
 
 ```
 const secondHand = document.querySelector('.second-hand');
