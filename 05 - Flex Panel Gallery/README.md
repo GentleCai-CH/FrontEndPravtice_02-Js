@@ -84,7 +84,7 @@
 }
 ```
 
-- 07.最後用 Javascript 触发动画：点击后，該`panel`图片放大，接着文字以动画方式恢复。
+- 07.最后用 Javascript 触发动画：点击后，该`panel`图片放大，接着文字以动画方式恢复。
 
 	- 首先取到`.panel`的nodeList，遍历监听每个节点，监听到`click`类型后`toggleOpen`放大图片，放大的方式是把`open`加到取到的`panel`节点，`this.classList.toggle('open')`
 	- 接著监听放大图片的动画结束`transitionend`，呈现文字动画`toggleActive`，要先判定监听回传的内容是不是包含`flex`，依浏览器不同safari会回传`flex`, 其他的则是`flex-flow`
