@@ -25,7 +25,7 @@ const ordered = inventors.sort((a, b) => a.year > b.year ? 1 : -1); //排序出�
 const oldest = inventors.sort((a, b) => { //排序年齡，由大到小
 	const lastGuy = a.passed - a.year;
 	const nextGuy = b.passed - b.year;
-    return lastGuy > nextGuy  ? -1 : 1 ;
+    	return lastGuy > nextGuy  ? -1 : 1 ;
 })
 ```
 
@@ -52,8 +52,8 @@ const de = links
 ```javascript
 const alpha = people.sort((lastOne, nextOne) => {
 	const [aLast, aFirst] = lsatOne.split(', ');
-    const [bLast, bFirst] = nextOne.split(', ');
-    return aLast > bLast ? 1:-1;
+    	const [bLast, bFirst] = nextOne.split(', ');
+    	return aLast > bLast ? 1:-1;
 })
 ```
 
