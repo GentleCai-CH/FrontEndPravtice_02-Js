@@ -67,6 +67,7 @@
       align-items: center;
     }
 
+    /* 前后两个p标签 */
     .panel > *:first-child { transform: translateY(-100%); }
     .panel.open-active > *:first-child { transform: translateY(0); }
     .panel > *:last-child { transform: translateY(100%); }
@@ -125,7 +126,11 @@
   </div>
 
   <script>
+        
     const panels = document.querySelectorAll('.panel');
+
+    panels.forEach(panel => panel.addEventListener('click', toggleOpen));
+    panels.forEach(panel => panel.addEventListener('transitionend', toggleActive));
 
     function toggleOpen() {
       console.log('Hello');
@@ -139,8 +144,6 @@
       }
     }
 
-    panels.forEach(panel => panel.addEventListener('click', toggleOpen));
-    panels.forEach(panel => panel.addEventListener('transitionend', toggleActive));
   </script>
 
 </body>
