@@ -10,14 +10,14 @@ html {
   box-sizing: inherit;
 }
 
-input {
-  width: 100%;
-  padding: 20px;
-}
-
 .search-form {
   max-width: 400px;
   margin: 50px auto;
+}
+
+input {
+  width: 100%;
+  padding: 20px;
 }
 
 input.search {
@@ -55,14 +55,16 @@ input.search {
   text-transform: capitalize;
 }
 
-.suggestions li:nth-child(even) {
-  transform: perspective(100px) rotateX(3deg) translateY(2px) scale(1.001);
-  background: linear-gradient(to bottom,  #ffffff 0%,#EFEFEF 100%);
-}
-
+/* 下方 第一个 */
 .suggestions li:nth-child(odd) {
   transform: perspective(100px) rotateX(-3deg) translateY(3px);
   background: linear-gradient(to top,  #ffffff 0%,#EFEFEF 100%);
+}
+
+/* 下方 第二个 */
+.suggestions li:nth-child(even) {
+  transform: perspective(100px) rotateX(3deg) translateY(2px) scale(1.001);
+  background: linear-gradient(to bottom,  #ffffff 0%,#EFEFEF 100%);
 }
 
 span.population {
