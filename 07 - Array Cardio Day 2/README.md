@@ -5,7 +5,7 @@
 
 ## 重点
 - `Array.prototype.some()`：
-	- 只要有一个条件符合返回`true`。`(new Date).getFullYear()`获取当前日期的年份。
+	- 只要有一个条件符合，就返回`true`。`(new Date).getFullYear()`获取当前日期的年份。
 
 ```javascript
     const isAdult = people.some(person => ((new Date).getFullYear()) - person.year >=19 );
@@ -13,7 +13,7 @@
 ```
 
 - `Array.prototype.every()`：
-	- 每一个条件都符合时返回`true`。`
+	- 每一个条件都符合时，返回`true`。`
 
 ```javascript
     const allAdults = people.every(person => ((new Date).getFullYear()) - person.year >=19 );
