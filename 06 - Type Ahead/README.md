@@ -89,8 +89,8 @@ function displayMatches(){
       const stateName = place.state.replace(regex, `<span class="hl">${this.value}</span>`);
       return `
 		<li>
-		<span class="name">${cityName}, ${stateName}</span>
-		<span class="population">${place.population}</span>
+		    <span class="name">${cityName}, ${stateName}</span>
+		    <span class="population">${numberWithCommas(place.population)}</span>
 		</li>
 	`;
   }).join('');
