@@ -1,39 +1,44 @@
 #  AJAX Type Ahead
 
 ## 摘要
-本篇主要介紹 `Fetch api`用 ajax的方式來取資料(城市名稱)，並依使用者輸入字符的不同查找不同的資料，會使用到正規表達式來處理字串。
+本篇主要介绍 `Fetch api`用 ajax的方式获取数据(city name)，并根据输入进行搜索，会使用到正则表达式处理字符串。
 [fetch api](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
 
-## 內容
-- `fetch()api`:是標準的web api，不需要透過引入則可直接使用，不過因為是新的api，會有瀏覽器相容的問題，詳見[MDN](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)。`Fetch API`有許多優點，其中一個是實作了`Promise`的語法結構，讓使用者可以更有效的解析(resolve)回傳的資料。
+## 重点
+- `fetch()api`:
+	- `fetch()api`是标准的web api，不需要引入即可直接使用，不过因为是新的api，会有浏览器兼容问题，详见[MDN](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)。
+	- `Fetch API`有很多优点，还可以用于实现`Promise`结构，可以更有效的解析(resolve)传回的。
 
-- `Promise`: `Promise`是一個`非同步(async)操作執行後的結果`。當`Promise`初始話時，狀態為`等待中(pending)`，當執行async任務後，會回傳結果，無論成功(fulfilled)或是拒絕(rejected)皆會回傳，且不會在改變回傳的內容，所以每次執行時都會回傳新的`Promise`物件。
+- `Promise`: 
+	- `Promise`是一个`异步(async)操作执行的結果`。`Promise`的初始状态为`等待中(pending)`，执行异步任务后，会返回结果，无论成功(fulfilled)或失败(rejected)都会返回结果，然后状态不再改变，所以每次执行都会返回新的`Promise`对象。
 
-- `Response`:當`Promise`被`解析(resolve)`後會回傳`Response`物件，可以直接以`.then()`方式進行串接解析，且能使用`Response`提供的`json()`方法取得資料。 
+- `Response`:
+	- `Promise`被`解析(resolve)`后会返回`Response`对象，可以直接使用`.then()`方法，且能使用`Response`提供的`json()`方法获取数据。 
 
->利用fetch取得資料
+>利用fetch获取数据
 
 ```javascript
 const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
 const cities = [];
 fetch(endpoint)
   .then(blob => blob.json())
-  .then(data => cities.push(...data)); //因為cities為const，無法直接賦值，需以Array.protorype.push 把資料丟進去。
+  .then(data => cities.push(...data)); //cities为const，不能直接赋值，需要用Array.protorype.push 添加数据。
 ```
 
-##### 補充資料 async/await
-- `async/await`:當一個function 被放上 `async`的前綴字(prefix)後，等於宣告一個非同步函式。代表方法內可以使用`await`關鍵字，當`await`被執行時，會暫停該`async function`的執行，並等待`await function`的回傳後才繼續執行。若回傳失敗(rejected)則拋出例外，並附上拒絕理由
+##### 补充 async/await
+- `async/await`:
+	- `async`前綴表示异步函数。异步函数内可以使用`await`关键字，当`await`执行时，会暂停该`async function`执行，等待`await function`返回结果后继续执行。返回失败(rejected)则抛出异常
 
 ```javascript
 async function foo(param){
-	var aa = await bar(); //等待bar執行並回傳，此時先暫停foo 的執行，收到回傳後才console.log(aa);
+	var aa = await bar(); //会先暂停foo 的执行，等待await bar()返回结果后才执行console.log(aa);
 	
 	console.log(aa);
 }
 
 ```
 
->接下來要處理輸入特定文字後取得特定資料。
+>处理输入文字，获取特定数据。
 
 - `RegExp()`:用來做正規表達試的參數， `g`代表global,`i`代表insensitive,不受大小寫影響。 
 
