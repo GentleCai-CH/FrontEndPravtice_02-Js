@@ -1,7 +1,7 @@
 # Array Cardio Day2
 
 ## 摘要
-本篇继Day 4，继续对数组常用方法做介紹。包含`some()`，`every()`，`find()`，`findIndex()`，其中也用到了`splice()`, `slice()`, `...`等。
+本篇继Day 4，继续对数组常用方法做介绍。包含`some()`，`every()`，`find()`，`findIndex()`，其中也用到了`splice()`, `slice()`, `...`等。
 
 ## 重点
 - `Array.prototype.some()`：
