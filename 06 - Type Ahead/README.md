@@ -6,7 +6,7 @@
 
 ## 重点
 
-> 利用fetch获取数据
+> 01.利用fetch获取数据
 
 ```javascript
 const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
@@ -16,7 +16,7 @@ fetch(endpoint)
   .then(data => cities.push(...data)); //cities为const，不能直接赋值，需要用Array.protorype.push 添加数据。
 ```
 
-- `fetch()api`:
+- `fetch()`api:
 	- `fetch()api`是标准的web api，不需要引入即可直接使用，不过因为是新的api，会有浏览器兼容问题，详见[MDN](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)。
 	- `Fetch API`有很多优点，还可以用于实现`Promise`结构，可以更有效的解析(resolve)传回的。
 
@@ -39,9 +39,10 @@ async function foo(param){
 
 ```
 
->处理输入文字，获取特定数据。
+>02.处理输入文字，获取特定数据。
 
-- `RegExp()`:用來做正規表達試的參數， `g`代表global,`i`代表insensitive,不受大小寫影響。 
+- `RegExp(this.value, 'gi')`:
+	- `g`代表global,`i`代表insensitive,不受大小写影响。 
 
 ```javascript
 function findMatches(wordToMatch, cities){
@@ -52,7 +53,7 @@ function findMatches(wordToMatch, cities){
 }
 ```
 
-到這邊就確定可以透過`findMatches()`取到特定的資料了。
+此时就可以用`findMatches()`获取特定数据了。
 
 > 接下來要把資料依照查找的字串render出來。
 
