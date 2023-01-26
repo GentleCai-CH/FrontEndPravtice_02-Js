@@ -98,7 +98,7 @@ function displayMatches(){
 }
 ```
 
-> 05.处理正则表达式
+> 05.数字的处理：替换成 逗号、
 
 ```javascript
 function numberWithCommas(x) {
