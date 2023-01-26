@@ -26,8 +26,7 @@ fetch(endpoint)
 - `Response`:
 	- `Promise`被`解析(resolve)`后会返回`Response`对象，可以直接使用`.then()`方法，且能使用`Response`提供的`json()`方法获取数据。 
 
-##### 补充 async/await
-- `async/await`:
+- async/await:
 	- `async`前綴表示异步函数。异步函数内可以使用`await`关键字，当`await`执行时，会暂停该`async function`执行，等待`await function`返回结果后继续执行。返回失败(rejected)则抛出异常
 
 ```javascript
@@ -44,6 +43,8 @@ async function foo(param){
 - `RegExp(this.value, 'gi')`:
 	- `g`代表global,`i`代表insensitive,不受大小写影响。 
 
+获取特定数据。
+
 ```javascript
 function findMatches(wordToMatch, cities){
   return cities.filter(place => {
@@ -53,11 +54,10 @@ function findMatches(wordToMatch, cities){
 }
 ```
 
-此时就可以用`findMatches()`获取特定数据了。
 
-> 接下來要把資料依照查找的字串render出來。
+> 03.将符合的数据渲染出来。
 
-- 使先對輸入的自框建立`keyup`及`change`監聽事件，並觸發`displayMatehes`的查找事件。
+- 对输入框设置`keyup`及`change`监听事件，并触发`displayMatehes`函数。
 
 ```javascript
 function displayMatches(){
@@ -71,11 +71,13 @@ searchInput.addEventListener('change', displayMatches);
 searchInput.addEventListener('keyup', displayMatches);
 ```
 
-> 定義查找事件`displayMatches`的內容。
+> 04.定义处理函数`displayMatches`。
 
-- 首先先取得資料，並把資料重新`map`，並把查詢的字用css方式顯示出來。
-- `join()`:把`arrayObject`中的所有元素放入一個字串中。
-- 如果是要return `html`的語法要用` `` `包裹，中間要傳遞的參數可以用`${value}`，帶入。
+- 将获取的数据重新`map`，并用css方式显示出来。
+- `join()`:
+	- 把`arrayObject`中的所有元素放入字符串中。
+- 返回 `html`：
+	- 使用反引号` `` `包裹内容，用`${value}`传递参数。
 
 ```javascript
 function displayMatches(){
@@ -95,9 +97,7 @@ function displayMatches(){
 }
 ```
 
-> 最後再處理人數的顯示處理問題。
-
-- 用`numberWithCommas`處理正規表達試的問題。
+> 05.处理正则表达式
 
 ```javascript
 function numberWithCommas(x) {
@@ -109,6 +109,4 @@ function displayMatches(){
   <span class="population">${numberWithCommas(place.population)}</span>
 }
 ```
-
-> 今日項目完成！
 
