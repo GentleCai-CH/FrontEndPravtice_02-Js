@@ -1,54 +1,63 @@
 # Array Cardio Day2
 
 ## 摘要
-本篇延續Day4 的陣列常使用方法做介紹。本篇包含`some()`，`every()`，`find()`，`findIndex()`，利用也提到了關於`splice()`, `slice()`, `...`的應用。
+本篇继Day 4，继续对数组常用方法做介紹。包含`some()`，`every()`，`find()`，`findIndex()`，其中也用到了`splice()`, `slice()`, `...`等。
 
-## 內容
-- `some()`:  `Array.prototype.some()`，只要一個條件符合就回傳`true`。`(new Date).getFullYear()`可以取得當前日期的年份。
-
->題目：查詢陣列內是否有人成年
+## 重点
+- `Array.prototype.some()`：
+	- 只要有一个条件符合返回`true`。`(new Date).getFullYear()`获取当前日期的年份。
 
 ```javascript
     const isAdult = people.some(person => ((new Date).getFullYear()) - person.year >=19 );
     console.log(isAdult);
 ```
-- `every()`:  `Array.prototype.every()`，要每一個都符合條件才回傳`true`。`
 
->題目：查詢陣列內是否皆為成年。
+- `Array.prototype.every()`：
+	- 每一个条件都符合时返回`true`。`
 
 ```javascript
     const allAdults = people.every(person => ((new Date).getFullYear()) - person.year >=19 );
     console.log(allAdults);
 ```
-- `find()`:有點類似`filter()`，但是`filter`會回傳全部符合的項目，`find()`則回傳單一項目。
 
->題目：找陣列id等於823423，並回傳該元素。
+- `find()`:
+	- 类似`filter()`，但是`filter`会返回多个符合元素，`find()`只返回一个符合元素。
+
+找到数组索引823423，并返回该元素。
 
 ```javacript
     const comment = comments.find(comment => comment.id === 823423);
     console.log(comment);
 ```
-- `findIndex()`:和`find()`功能一樣，只是會查找`index`。
 
->題目：找陣列id等於823423，並回傳index
+- `findIndex()`:
+	- 和`find()`类似，但是只查找`index`。
+
+找到数组索引823423，并返回索引。
 
 ```javascript
 	const index = comments.find(comment => comment.id === 823423);
 ```
+
+
 刪除元素可以使用
 
-- `splice(index, num)`，第一個參數是要刪除的index起點, 第二個參數是要刪除的數量，第三個參數之後是要新加入的內容。會回傳刪除後的陣列。
-- `slice(index, index)`，第一個參數為起點，第二個參數為終點（不包含終點），若第二個參數不填預設為最後。回傳一個array object。若是利用拆分的方式，掠過`index`不處理。可以達到`splice()`的效果。
-- `...`spread operator(ES6功能)，可以將陣列轉換成單一數組，或將單一數組轉換成陣列。下面的例子因為連續使用`comments.slice()`，所以會讓數值變成`[Array[], Array[]]`，為了打破第二層的array，需使用`...`，把結構轉變成`[{}, {}, {}, {}, ...]`。
+- `splice(index, num)`
+	- 第一个参数是要刪除的起始索引, 第二个参数是要刪除的数目，第三个参数及后面是要添加的内容。会返回删除后的数组。
 
->題目：刪除該index元素。
+- `slice(index, index)`，
+	- 第一个参数是起始索引，第二个参数是终点索引（不包含终点），第二个参数若省略表示直到最后。返回一个array object。若是利用拆分的方式，掠过`index`不处理。可以达到`splice()`的效果。
+- `...`扩展运算符(ES6功能)
+	- 可以实现数组和序列之间的转换。下面的例子因为连续使用`comments.slice()`，会让结果变成`[Array[], Array[]]`，可以使用`...`，把结构变成`[{}, {}, {}, {}, ...]`。
+
+刪除该index元素。
 
 ```javascript
 	comments.splice(index, 1);
 	//or 用slice處理。
 	const newComments = [
-      ...comments.slice(0, index),
-      ...comments.slice(index + 1)
+	    ...comments.slice(0, index),
+	    ...comments.slice(index + 1)
     ];
 	console.table(comments);
 ```
