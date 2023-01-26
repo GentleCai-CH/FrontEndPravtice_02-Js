@@ -21,10 +21,10 @@ fetch(endpoint)
 	- `Fetch API`有很多优点，还可以用于实现`Promise`结构，可以更有效的解析(resolve)传回的。
 
 - `Promise`: 
-	- `Promise`是一个`异步(async)操作执行的結果`。`Promise`的初始状态为`等待中(pending)`，执行异步任务后，会返回结果，无论成功(fulfilled)或失败(rejected)都会返回结果，然后状态不再改变，所以每次执行都会返回新的`Promise`对象。
+	- `Promise`是一个异步(async)操作执行的結果。`Promise`的初始状态为`等待中(pending)`，执行异步任务后，会返回结果，无论成功(fulfilled)或失败(rejected)都会返回结果，然后状态不再改变，所以每次执行都会返回新的`Promise`对象。
 
 - `Response`:
-	- `Promise`被`解析(resolve)`后会返回`Response`对象，可以直接使用`.then()`方法，且能使用`Response`提供的`json()`方法获取数据。 
+	- `Promise`被`解析(resolve)`后会返回`Response`对象，可以链式使用`.then()`方法，且能使用`Response`提供的`json()`方法获取数据。 
 
 - async/await:
 	- `async`前綴表示异步函数。异步函数内可以使用`await`关键字，当`await`执行时，会暂停该`async function`执行，等待`await function`返回结果后继续执行。返回失败(rejected)则抛出异常
@@ -41,7 +41,7 @@ async function foo(param){
 >02.处理输入文字，获取特定数据。
 
 - `RegExp(this.value, 'gi')`:
-	- `g`代表global,`i`代表insensitive,不受大小写影响。 
+	- `g`表示global,`i`表示忽略大小写。 
 
 获取特定数据。
 
