@@ -54,14 +54,14 @@ input.search {
   justify-content: space-between;
   text-transform: capitalize;
 }
-
-/* 下方 第一个 */
+/* 使用单双是因为，查找出来的数据将应用此样式，且可能不止两条 */
+/* 下方 单数个 */
 .suggestions li:nth-child(odd) {
   transform: perspective(100px) rotateX(-3deg) translateY(3px);
   background: linear-gradient(to top,  #ffffff 0%,#EFEFEF 100%);
 }
 
-/* 下方 第二个 */
+/* 下方 偶数个 */
 .suggestions li:nth-child(even) {
   transform: perspective(100px) rotateX(3deg) translateY(2px) scale(1.001);
   background: linear-gradient(to bottom,  #ffffff 0%,#EFEFEF 100%);

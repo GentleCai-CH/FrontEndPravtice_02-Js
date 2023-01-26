@@ -2,7 +2,7 @@
  * @Author: GentleCai-CH 2406756724@qq.com
  * @Date: 2023-01-22 22:59:47
  * @LastEditors: GentleCai-CH 2406756724@qq.com
- * @LastEditTime: 2023-01-26 14:23:01
+ * @LastEditTime: 2023-01-26 15:57:09
  * @FilePath: \JavaScript30\06 - Type Ahead\index-FINISHED.html
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -44,14 +44,13 @@ const suggestions = document.querySelector('.suggestions');
 searchInput.addEventListener('change', displayMatches);
 searchInput.addEventListener('keyup', displayMatches);
 
-
-
+//处理数字，替换成 逗号
 function numberWithCommas(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 }
 
-
 function displayMatches() {
+  //this.value是输入框的值
   const matchArray = findMatches(this.value, cities);
   const html = matchArray.map(place => {
     const regex = new RegExp(this.value, 'gi');
