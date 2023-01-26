@@ -81,6 +81,7 @@ searchInput.addEventListener('keyup', displayMatches);
 
 ```javascript
 function displayMatches(){
+//this.value是输入框的值
   const matchArray = findMatches(this.value, cities);
   const html = matchArray.map(place => {
       const regex = new RegExp(this.value, 'gi');
