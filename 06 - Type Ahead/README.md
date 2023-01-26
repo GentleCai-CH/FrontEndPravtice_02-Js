@@ -5,6 +5,17 @@
 [fetch api](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
 
 ## 重点
+
+> 利用fetch获取数据
+
+```javascript
+const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+const cities = [];
+fetch(endpoint)
+  .then(blob => blob.json())
+  .then(data => cities.push(...data)); //cities为const，不能直接赋值，需要用Array.protorype.push 添加数据。
+```
+
 - `fetch()api`:
 	- `fetch()api`是标准的web api，不需要引入即可直接使用，不过因为是新的api，会有浏览器兼容问题，详见[MDN](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)。
 	- `Fetch API`有很多优点，还可以用于实现`Promise`结构，可以更有效的解析(resolve)传回的。
@@ -14,16 +25,6 @@
 
 - `Response`:
 	- `Promise`被`解析(resolve)`后会返回`Response`对象，可以直接使用`.then()`方法，且能使用`Response`提供的`json()`方法获取数据。 
-
->利用fetch获取数据
-
-```javascript
-const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
-const cities = [];
-fetch(endpoint)
-  .then(blob => blob.json())
-  .then(data => cities.push(...data)); //cities为const，不能直接赋值，需要用Array.protorype.push 添加数据。
-```
 
 ##### 补充 async/await
 - `async/await`:
