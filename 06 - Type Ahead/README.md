@@ -38,7 +38,7 @@ async function foo(param){
 
 ```
 
->02.处理输入文字，获取特定数据。
+> 02.处理输入文字，获取特定数据。
 
 - `RegExp(this.value, 'gi')`:
 	- `g`表示global,`i`表示忽略大小写。 
