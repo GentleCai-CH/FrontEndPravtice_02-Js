@@ -2,13 +2,13 @@
 
 ##  摘要
 
-本篇主要透過Html的`canvas` 標籤搭配Javascript做出畫布的效果。效果包括:顏色的變化(`hsl`)及軌跡的粗細縮放。
+本篇主要通过Html的`canvas`标签搭配Javascript做出画布效果。包括:颜色变化(`hsl`)及画笔粗细变化。
 
-## 內容
-
-> 首先先定義畫布的大小
-
-- html內已經定義了標籤`canvas` 用JS選取後，需先設定畫布的內容，使用`getContext('2d')`定義為2d繪圖。接下來可以定義畫布範圍，若不定義範圍則使用html定義的範圍，若需改寫則須重新定義，這邊定義為`window.innerWidth`及`window.innerHeight`。
+## 重点
+- 01.首先定义画布的大小
+  - 用JS取到`canvas`标签后 ，
+  - 需要先设定画布的内容 ，使用`getContext('2d')`定义为2d绘图。
+  - 然后设置画布范围，`window.innerWidth`及`window.innerHeight`，没有设置范围时将使用html范围。
 
   ```javascript
   const canvas = document.querySelector('#draw');
@@ -17,9 +17,9 @@
   canvas.height = window.innerHeight;
   ```
 
-> 接下來定義繪製的顯示方式
+- 02.定义绘制的显示方式
 
-- Canvas已經有內建許多屬性，可參考[Canvas](http://www.w3school.com.cn/tags/html_ref_canvas.asp)，這邊會設定4種屬性。
+Canvas有许多属性，可參考[Canvas](http://www.w3school.com.cn/tags/html_ref_canvas.asp)，这里设定4种属性。
 
   - `ctx.strokeStyle`定義繪畫的顏色，
   - `ctx.lineJoin`定義兩線相交時的拐角練習，
