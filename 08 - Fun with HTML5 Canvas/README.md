@@ -6,11 +6,11 @@
 
 ## 重点
 
-- 01.首先定义画布的大小
+> 01.首先定义画布的大小
 
-  - 用JS取到`canvas`标签后 ，
-  - 需要先设定画布的内容 ，使用`getContext('2d')`定义为2d绘图。
-  - 然后设置画布范围，`window.innerWidth`及`window.innerHeight`，没有设置范围时将使用html范围。
+- 用JS取到`canvas`标签后 ，
+- 需要先设定画布的内容 ，使用`getContext('2d')`定义为2d绘图。
+- 然后设置画布范围，`window.innerWidth`及`window.innerHeight`，没有设置范围时将使用html范围。
 
   ```javascript
   const canvas = document.querySelector('#draw');
@@ -19,7 +19,7 @@
   canvas.height = window.innerHeight;
   ```
 
-- 02.定义画布的显示方式
+> 02.定义画布的显示方式
 
 - Canvas有许多属性，可參考[Canvas](http://www.w3school.com.cn/tags/html_ref_canvas.asp)，这里设定4种属性。
 
@@ -35,17 +35,17 @@
   ctx.lineWidth = 100;
   ```
 
-- 03.定义画布的起始方式。
+> 03.定义画布的起始方式。
 
-  - 利用`isDrawing`等于`true`表示正在绘制，`false`表示不再绘制。
+- 利用`isDrawing`等于`true`表示正在绘制，`false`表示不再绘制。
 
   ```javascript
   let isDrawing = false; //一开始为false
   ```
 
-- 04.设置事件监听，驱动绘制。
+> 04.设置事件监听，驱动绘制。
 
-  - 用到了`mousedown`鼠标按下， `mousemove`鼠标移动，`mouseup`鼠标松开，及`mouseout` 鼠标离开窗口等事件类型。
+- 用到了`mousedown`鼠标按下， `mousemove`鼠标移动，`mouseup`鼠标松开，及`mouseout` 鼠标离开窗口等事件类型。
   - 鼠标按下后`isDrawing`变为`true`，开始绘制。
   - 鼠标松开后`isDrawing`变为`false`，绘制结束。
   - 离开窗口时`isDrawing`变为`false`，取消绘制。
@@ -57,9 +57,9 @@
   canvas.addEventListener('mouseout', ()=>isDrawing = false);//取消绘制
   ```
 
-- 05.定义监听处理函数，即进行绘制。
+> 05.定义监听处理函数，即进行绘制。
 
-  - 定义`draw`方法。首先判定`isDrawing`是否为`true`，为`false`则返回。
+- 定义`draw`方法。首先判定`isDrawing`是否为`true`，为`false`则返回。
 
   ```javascript
   function draw(e){
@@ -68,14 +68,14 @@
   }
   ```
 
-- 06.定义画布的内容，用到4个参数。
+> 06.定义画布的内容，用到4个参数。
 
-  - `ctx.beginPath()`绘制开始。
-  - `ctx.moveTo(a,b)`起始位置。
-  - `ctx.lineTo(a,b)`终点位置。
-  - `ctx.stroke()`   已绘制的路径。
+- `ctx.beginPath()`绘制开始。
+- `ctx.moveTo(a,b)`起始位置。
+- `ctx.lineTo(a,b)`终点位置。
+- `ctx.stroke()`   已绘制的路径。
 
-> 先定义最后的位置为`lastX, lastY`。`e.offsetX`表示事件当前坐标，可以定义`e.offsetX, e.offsetY`为每次的起始位置。
+- 先定义最后的位置为`lastX, lastY`。`e.offsetX`表示事件当前坐标，可以定义`e.offsetX, e.offsetY`为每次的起始位置。
 
   ```javascript
   let lastX = 0;
@@ -95,7 +95,7 @@
   }); //开始绘制
   ```
 
-> 会发现，绘制路径都是以同一个点为起始位置，所以需要动态更新起始位置，在`draw`方法内加入`[lastX, lastY] = [e.offsetX, e.offsetY];`更新起始位置。
+- 会发现，绘制路径都是以同一个点为起始位置，所以需要动态更新起始位置，在`draw`方法内加入`[lastX, lastY] = [e.offsetX, e.offsetY];`更新起始位置。
 
   ```javascript
   function draw(e){
@@ -129,7 +129,7 @@
   }
   ```
 
-> 顏色定義完了， 應該可以看到效果了吧?接下來要來定義寬度囉，這邊的處理方式是由細到粗，並回歸到細。
+> 08.顏色定義完了， 應該可以看到效果了吧?接下來要來定義寬度囉，這邊的處理方式是由細到粗，並回歸到細。
 
 - 定義`direction`為粗細的參數，並定義其在`draw`中的變化。
 
@@ -152,5 +152,3 @@
     }
   }
   ```
-
-> 到這邊就完成囉!
