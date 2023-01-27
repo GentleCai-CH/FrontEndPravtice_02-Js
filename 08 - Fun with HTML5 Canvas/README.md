@@ -1,4 +1,4 @@
-# Canvas
+# [Canvas](http://www.w3school.com.cn/tags/html_ref_canvas.asp)
 
 ##  摘要
 
@@ -9,7 +9,7 @@
 > 01.首先定义画布的大小
 
 - 用JS取到`canvas`标签后 ，
-- 需要先设定画布的内容 ，使用`getContext('2d')`定义为2d绘图。
+- 需要先设定画布对象 ，使用`element.getContext('2d')`定义为2d对象。
 - 然后设置画布范围，`window.innerWidth`及`window.innerHeight`，没有设置范围时将使用html范围。
 
   ```javascript
@@ -21,7 +21,7 @@
 
 > 02.定义画布的显示方式
 
-- Canvas有许多属性，可參考[Canvas](http://www.w3school.com.cn/tags/html_ref_canvas.asp)，这里设定4种属性。
+- Canvas有许多属性，这里设定4种属性。
 
   - `ctx.strokeStyle`定义画笔颜色，
   - `ctx.lineJoin`定义两线相交时的拐角，
