@@ -10,7 +10,7 @@
 
 - 用JS取到`canvas`标签后 ，
 - 需要先设定画布对象 ，使用`element.getContext('2d')`定义为2d对象。
-- 然后设置画布范围，`window.innerWidth`及`window.innerHeight`，没有设置范围时将使用html范围。
+- 然后设置画布大小，`window.innerWidth`及`window.innerHeight`，没有设置范围时将使用html范围。
 
   ```javascript
   const canvas = document.querySelector('#draw');
@@ -19,13 +19,13 @@
   canvas.height = window.innerHeight;
   ```
 
-> 02.定义画布的显示方式
+> 02.定义画布的样式
 
 - Canvas有许多属性，这里设定4种属性。
 
   - `ctx.strokeStyle`定义画笔颜色，
-  - `ctx.lineJoin`定义两线相交时的拐角，
-  - `ctx.lineCap`定义结束端点样式。
+  - `ctx.lineJoin`定义两线相交时的拐角类型。miter 默认,尖角。bevel 斜角。round	 圆角。
+  - `ctx.lineCap`定义结束端点样式。butt	默认。每个末端添加平直边缘。round	每个末端添加圆形线帽。square	每个末端添加正方形线帽。
   - `ctx.lineWidth`定义画笔粗细。
 
   ```javascript
@@ -35,9 +35,9 @@
   ctx.lineWidth = 100;
   ```
 
-> 03.定义画布的起始方式。
+> 03.定义画布的起始状态。
 
-- 利用`isDrawing`等于`true`表示正在绘制，`false`表示不再绘制。
+- 用`isDrawing`等于`true`表示正在绘制，`false`表示没有绘制。
 
   ```javascript
   let isDrawing = false; //一开始为false
@@ -47,6 +47,7 @@
 
 - 用到了`mousedown`鼠标按下， `mousemove`鼠标移动，`mouseup`鼠标松开，及`mouseout` 鼠标离开窗口等事件类型。
   - 鼠标按下后`isDrawing`变为`true`，开始绘制。
+  - 鼠标移动时，调用绘制函数。
   - 鼠标松开后`isDrawing`变为`false`，绘制结束。
   - 离开窗口时`isDrawing`变为`false`，取消绘制。
 
@@ -57,7 +58,7 @@
   canvas.addEventListener('mouseout', ()=>isDrawing = false);//取消绘制
   ```
 
-> 05.定义监听处理函数，即进行绘制。
+> 05.定义监听处理函数，即绘制函数。
 
 - 定义`draw`方法。首先判定`isDrawing`是否为`true`，为`false`则返回。
 
@@ -73,7 +74,7 @@
   - `ctx.beginPath()`绘制开始。
   - `ctx.moveTo(a,b)`起始位置。
   - `ctx.lineTo(a,b)`终点位置。
-  - `ctx.stroke()`   已绘制的路径。
+  - `ctx.stroke()`   进行路径绘制。
 
 - 先定义最后的位置为`lastX, lastY`。`e.offsetX`表示事件当前坐标，可以定义`e.offsetX, e.offsetY`为每次的起始位置。
 
