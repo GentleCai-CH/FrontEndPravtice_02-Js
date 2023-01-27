@@ -1,14 +1,16 @@
-# Canvas
+# [Canvas](http://www.w3school.com.cn/tags/html_ref_canvas.asp)
 
 ##  摘要
 
-本篇主要透過Html的`canvas` 標籤搭配Javascript做出畫布的效果。效果包括:顏色的變化(`hsl`)及軌跡的粗細縮放。
+本篇主要通过Html的`canvas`标签搭配Javascript做出画布效果。包括:颜色变化(`hsl`)及画笔粗细变化。
 
-## 內容
+## 重点
 
-> 首先先定義畫布的大小
+> 01.首先定义画布的大小
 
-- html內已經定義了標籤`canvas` 用JS選取後，需先設定畫布的內容，使用`getContext('2d')`定義為2d繪圖。接下來可以定義畫布範圍，若不定義範圍則使用html定義的範圍，若需改寫則須重新定義，這邊定義為`window.innerWidth`及`window.innerHeight`。
+- 用JS取到`canvas`标签后 ，
+- 需要先设定画布对象 ，使用`element.getContext('2d')`定义为2d对象。
+- 然后设置画布范围，`window.innerWidth`及`window.innerHeight`，没有设置范围时将使用html范围。
 
   ```javascript
   const canvas = document.querySelector('#draw');
@@ -17,62 +19,63 @@
   canvas.height = window.innerHeight;
   ```
 
-> 接下來定義繪製的顯示方式
+> 02.定义画布的显示方式
 
-- Canvas已經有內建許多屬性，可參考[Canvas](http://www.w3school.com.cn/tags/html_ref_canvas.asp)，這邊會設定4種屬性。
+- Canvas有许多属性，这里设定4种属性。
 
-  - `ctx.strokeStyle`定義繪畫的顏色，
-  - `ctx.lineJoin`定義兩線相交時的拐角練習，
-  - `ctx.lineCap`定義結束端點樣式。
-  - `ctx.lineWidth`定義寬度。
+  - `ctx.strokeStyle`定义画笔颜色，
+  - `ctx.lineJoin`定义两线相交时的拐角，
+  - `ctx.lineCap`定义结束端点样式。
+  - `ctx.lineWidth`定义画笔粗细。
 
   ```javascript
   ctx.strokeStyle = '#BADA55';
-  ctx.lineJoin = 'round'; //round為圓弧。
-  ctx.lineCap = 'round'; //round為圓弧。
+  ctx.lineJoin = 'round'; //round为圆弧。
+  ctx.lineCap = 'round'; 
   ctx.lineWidth = 100;
   ```
 
-> 接下來定義繪畫的起始方式。
+> 03.定义画布的起始方式。
 
-- 利用`isDrawing`等於`true`代表正在繪圖，`false`代表不在繪圖。
-
-  ```javascript
-  let isDrawing = false; //一開始先定義為false
-  ```
-
-> 接下來定義監聽事件，用事件來驅動繪畫。
-
-- 這邊會使用到`mousedown`按下滑鼠， `mousemove`移動滑鼠，`mouseup`放開滑鼠及`mouseout` 滑鼠移開使窗。按下滑鼠後`isDrawing`為`true`開始繪畫。`mouseup`時代表會畫完成`isDrawing`為`false`，`mouseout`移開視窗時`isDrawing`為`false`。
+- 利用`isDrawing`等于`true`表示正在绘制，`false`表示不再绘制。
 
   ```javascript
-  canvas.addEventListener('mousedown', ()=>isDrawing = true); //開始繪圖]
-  canvas.addEventListener('mousemove', draw);//繪製圖片中
-  canvas.addEventListener('mouseup', ()=>isDrawing = false);//完成繪圖
-  canvas.addEventListener('mouseout', ()=>isDrawing = false);//取消繪圖
+  let isDrawing = false; //一开始为false
   ```
 
-> 先定義繪畫的方法，並查看監聽事件是否有效。
+> 04.设置事件监听，驱动绘制。
 
-- 定義`draw`這個方法。首先可以先判定`isDrawing`是否為`true`，為`false`則返回。
+- 用到了`mousedown`鼠标按下， `mousemove`鼠标移动，`mouseup`鼠标松开，及`mouseout` 鼠标离开窗口等事件类型。
+  - 鼠标按下后`isDrawing`变为`true`，开始绘制。
+  - 鼠标松开后`isDrawing`变为`false`，绘制结束。
+  - 离开窗口时`isDrawing`变为`false`，取消绘制。
+
+  ```javascript
+  canvas.addEventListener('mousedown', ()=>isDrawing = true); //开始绘制
+  canvas.addEventListener('mousemove', draw);//绘制中
+  canvas.addEventListener('mouseup', ()=>isDrawing = false);//绘制结束
+  canvas.addEventListener('mouseout', ()=>isDrawing = false);//取消绘制
+  ```
+
+> 05.定义监听处理函数，即进行绘制。
+
+- 定义`draw`方法。首先判定`isDrawing`是否为`true`，为`false`则返回。
 
   ```javascript
   function draw(e){
-    if (!isDrawing) return; //設定停止
-    console.log(e); //此時可以打開使用者工具看看有無回傳座標相關訊息，若有則代表到目前為止皆為成功!
+    if (!isDrawing) return; 
+    console.log(e); //可以打开使用者工具看看是否有返回坐标信息，若有则表示正确!
   }
   ```
 
-> 接下來開始定義繪畫的內容
+> 06.定义画布的内容，用到4个参数。
+- 
+  - `ctx.beginPath()`绘制开始。
+  - `ctx.moveTo(a,b)`起始位置。
+  - `ctx.lineTo(a,b)`终点位置。
+  - `ctx.stroke()`   已绘制的路径。
 
-- 定義繪畫內容會用到4個參數。
-
-  - `ctx.beginPath()`當作繪畫啟動。
-  - `ctx.moveTo(a,b)`當作起始位置。
-  - `ctx.lineTo(a,b)`當作終點位置。
-  - `ctx.stroke()`代表繪製以定義的路徑。
-
-- 先在function外定義最後的位置為`lastX, lastY`。`e.offsetX`代表回傳事件的當前座標，所以我們可以定義`e.offsetX, e.offsetY`為每次的起始位置。
+- 先定义最后的位置为`lastX, lastY`。`e.offsetX`表示事件当前坐标，可以定义`e.offsetX, e.offsetY`为每次的起始位置。
 
   ```javascript
   let lastX = 0;
@@ -82,57 +85,57 @@
     if (!isDrawing) return;
     ctx.beginPath();
     ctx.moveTo(lastX, lastY);
-    ctx.lineTo(e.offsetX, e.offsetY); //畫到的位置。
+    ctx.lineTo(e.offsetX, e.offsetY); //画到的位置。
     ctx.stroke();
   }
 
   canvas.addEventListener('mousedown', (e)=> {
     isDrawing = true;
     [lastX, lastY] = [e.offsetX, e.offsetY];
-  }); //開始繪圖
+  }); //开始绘制
   ```
 
-- 到這邊應該會發現繪製的途徑都是以同一個點當作起始位置，所以我們需要動態的更動起始位置，在`draw`方法內加入`[lastX, lastY] = [e.offsetX, e.offsetY];`更新起始位置。
+- 会发现，绘制路径都是以同一个点为起始位置，所以需要动态更新起始位置，在`draw`方法内加入`[lastX, lastY] = [e.offsetX, e.offsetY];`更新起始位置。
 
   ```javascript
   function draw(e){
     if (!isDrawing) return;
     ctx.beginPath();
     ctx.moveTo(lastX, lastY);
-    ctx.lineTo(e.offsetX, e.offsetY); //畫到的位置。
+    ctx.lineTo(e.offsetX, e.offsetY); //画到的位置。
     ctx.stroke();
     [lastX, lastY] = [e.offsetX, e.offsetY];
   }
   ```
 
-> 到目前為止應該就能呈現在畫布上畫圖的效果了!如果你還想要再做些效果?像是顏色，以及繪畫的粗細?這邊先來時做顏色的變化吧!
+> 07.设置颜色变化
 
-- `hsl`是一個色彩表示的方式`hsl(hue, Saturation, Lightness)`。
+- `hsl`是一种色彩表示方式`hsl(hue, Saturation, Lightness)`。
 
-  - `hue`代表顏色的度數0-360，0是紅色 ，120是綠色，240是藍色；
-  - `Saturation`代表灰階程度，0%為灰黑，100%為彩色，一般設置為100%。
-  - `Lightness`為亮度，0%代表黑，100%代表白，一般設置為50%。
+  - `hue`表示色调，0-360，0是红色 ，120是绿色，240是蓝色；
+  - `Saturation`表示饱和度，0%为灰黑，100%为彩色，一般设置为100%。
+  - `Lightness`表示亮度，0%代表黑，100%代表白，一般设置为50%。
 
   ```javascript
   let hue = 0;
 
   function draw(e){
-    ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;//重新定義顏色
+    ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;//重新定义颜色
     ...
     hue++;
     if(hue>=360){
-      hue = 0; //若++到360自動歸零
+      hue = 0; //若++到360归零
     }
   }
   ```
 
-> 顏色定義完了， 應該可以看到效果了吧?接下來要來定義寬度囉，這邊的處理方式是由細到粗，並回歸到細。
+> 08.定义画笔粗细变化。
 
-- 定義`direction`為粗細的參數，並定義其在`draw`中的變化。
+- 定义`direction`变量，判断是否由细到粗变化。
 
-- 當`direction`為`ture`時，`ctx.lineWidth`遞增，當增加到100時把`direction`改成`false`。
+- 当`direction`为`ture`时，`ctx.lineWidth`递增，增加到100时把`direction`改成`false`。
 
-- 當`direction`為`false`時，`ctx.lineWidth`遞減，當撿到1時把`direction`改成`true`。
+- 当`direction`为`ture`时，`ctx.lineWidth`递减，减到1时，把`direction`改成`true`。
 
   ```javascript
   let direction = true;
@@ -149,5 +152,3 @@
     }
   }
   ```
-
-> 到這邊就完成囉!
