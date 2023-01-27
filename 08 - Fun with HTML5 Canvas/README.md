@@ -108,7 +108,7 @@
   }
   ```
 
-- 07.设置颜色变化
+> 07.设置颜色变化
 
 - `hsl`是一個色彩表示的方式`hsl(hue, Saturation, Lightness)`。
 
