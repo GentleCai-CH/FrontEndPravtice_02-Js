@@ -69,7 +69,7 @@
   ```
 
 > 06.定义画布的内容，用到4个参数。
-
+- 
   - `ctx.beginPath()`绘制开始。
   - `ctx.moveTo(a,b)`起始位置。
   - `ctx.lineTo(a,b)`终点位置。
@@ -110,32 +110,32 @@
 
 > 07.设置颜色变化
 
-- `hsl`是一個色彩表示的方式`hsl(hue, Saturation, Lightness)`。
+- `hsl`是一种色彩表示方式`hsl(hue, Saturation, Lightness)`。
 
-  - `hue`代表顏色的度數0-360，0是紅色 ，120是綠色，240是藍色；
-  - `Saturation`代表灰階程度，0%為灰黑，100%為彩色，一般設置為100%。
-  - `Lightness`為亮度，0%代表黑，100%代表白，一般設置為50%。
+  - `hue`表示色调，0-360，0是红色 ，120是绿色，240是蓝色；
+  - `Saturation`表示饱和度，0%为灰黑，100%为彩色，一般设置为100%。
+  - `Lightness`表示亮度，0%代表黑，100%代表白，一般设置为50%。
 
   ```javascript
   let hue = 0;
 
   function draw(e){
-    ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;//重新定義顏色
+    ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;//重新定义颜色
     ...
     hue++;
     if(hue>=360){
-      hue = 0; //若++到360自動歸零
+      hue = 0; //若++到360归零
     }
   }
   ```
 
-> 08.顏色定義完了， 應該可以看到效果了吧?接下來要來定義寬度囉，這邊的處理方式是由細到粗，並回歸到細。
+> 08.定义画笔粗细变化。
 
-- 定義`direction`為粗細的參數，並定義其在`draw`中的變化。
+- 定义`direction`变量，判断是否由细到粗变化。
 
-- 當`direction`為`ture`時，`ctx.lineWidth`遞增，當增加到100時把`direction`改成`false`。
+- 当`direction`为`ture`时，`ctx.lineWidth`递增，增加到100时把`direction`改成`false`。
 
-- 當`direction`為`false`時，`ctx.lineWidth`遞減，當撿到1時把`direction`改成`true`。
+- 当`direction`为`ture`时，`ctx.lineWidth`递减，减到1时，把`direction`改成`true`。
 
   ```javascript
   let direction = true;
