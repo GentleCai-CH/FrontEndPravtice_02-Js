@@ -70,10 +70,10 @@
 
 > 06.定义画布的内容，用到4个参数。
 
-- `ctx.beginPath()`绘制开始。
-- `ctx.moveTo(a,b)`起始位置。
-- `ctx.lineTo(a,b)`终点位置。
-- `ctx.stroke()`   已绘制的路径。
+  - `ctx.beginPath()`绘制开始。
+  - `ctx.moveTo(a,b)`起始位置。
+  - `ctx.lineTo(a,b)`终点位置。
+  - `ctx.stroke()`   已绘制的路径。
 
 - 先定义最后的位置为`lastX, lastY`。`e.offsetX`表示事件当前坐标，可以定义`e.offsetX, e.offsetY`为每次的起始位置。
 
