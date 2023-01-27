@@ -19,7 +19,7 @@
 
 - 02.定义绘制的显示方式
 
-Canvas有许多属性，可參考[Canvas](http://www.w3school.com.cn/tags/html_ref_canvas.asp)，这里设定4种属性。
+- Canvas有许多属性，可參考[Canvas](http://www.w3school.com.cn/tags/html_ref_canvas.asp)，这里设定4种属性。
 
   - `ctx.strokeStyle`定義繪畫的顏色，
   - `ctx.lineJoin`定義兩線相交時的拐角練習，
