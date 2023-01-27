@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,16 +7,18 @@
 </head>
 <body>
 <canvas id="draw" width="800" height="800"></canvas>
+
 <script>
 const canvas = document.querySelector('#draw');
 const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 ctx.strokeStyle = '#BADA55';
-ctx.lineJoin = 'round';
-ctx.lineCap = 'round';
+ctx.lineJoin = 'bevel';// miter	默认,尖角。bevel 斜角。round	 圆角。
+ctx.lineCap = 'round';//butt	默认。每个末端添加平直边缘。round	每个末端添加圆形线帽。square	每个末端添加正方形线帽。
 ctx.lineWidth = 100;
 // ctx.globalCompositeOperation = 'multiply';
+
 
 let isDrawing = false;
 let lastX = 0;
@@ -23,22 +26,41 @@ let lastY = 0;
 let hue = 0;
 let direction = true;
 
+
+canvas.addEventListener('mousedown', (e) => {
+  isDrawing = true;
+  // 定义当前位置`e.offsetX, e.offsetY`为每次的起始位置
+  [lastX, lastY] = [e.offsetX, e.offsetY];
+});
+
+
+canvas.addEventListener('mousemove', draw);
+canvas.addEventListener('mouseup', () => isDrawing = false);
+canvas.addEventListener('mouseout', () => isDrawing = false);
+
+
 function draw(e) {
   if (!isDrawing) return; // stop the fn from running when they are not moused down
+  
   console.log(e);
-  ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+  
   ctx.beginPath();
   // start from
   ctx.moveTo(lastX, lastY);
   // go to
   ctx.lineTo(e.offsetX, e.offsetY);
+  // 进行路径绘制
   ctx.stroke();
+  // 定义`e.offsetX, e.offsetY`为每次的起始位置
   [lastX, lastY] = [e.offsetX, e.offsetY];
 
+  ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
   hue++;
   if (hue >= 360) {
     hue = 0;
   }
+  
+
   if (ctx.lineWidth >= 100 || ctx.lineWidth <= 1) {
     direction = !direction;
   }
@@ -50,16 +72,6 @@ function draw(e) {
   }
 
 }
-
-canvas.addEventListener('mousedown', (e) => {
-  isDrawing = true;
-  [lastX, lastY] = [e.offsetX, e.offsetY];
-});
-
-
-canvas.addEventListener('mousemove', draw);
-canvas.addEventListener('mouseup', () => isDrawing = false);
-canvas.addEventListener('mouseout', () => isDrawing = false);
 
 </script>
 
