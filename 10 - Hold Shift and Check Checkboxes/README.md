@@ -8,7 +8,7 @@
 
 ## 重点
 
->01. 首先对checkbox定义事件监听
+>01.首先对checkbox定义事件监听
 
 ```javascript
 const checkboxes = document.querySelectorAll('inbox input[type="checkbox"]');
