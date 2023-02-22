@@ -16,7 +16,8 @@ const checkboxes = document.querySelectorAll('inbox input[type="checkbox"]');
 checkboxes.forEach(chechbox.addEventListener('click' , handleCheck));
 ```
 
->02.处理函数handleCheck 方法。
+
+>02.定义处理函数handleCheck 方法。
 
 - 思路：
   - `shift`是在点击`checkbox`后再按下，且可以由`shiftKey`判定是否按下，当两者满足时，再点击另一个`checkbox`出现效果；
@@ -41,7 +42,4 @@ function handleChecj(e){
   lastChecked = this
 }
 ```
-
-
-本篇没有运用新的方法，需要构思一下方法。
 
