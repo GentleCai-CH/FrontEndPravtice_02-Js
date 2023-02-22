@@ -23,7 +23,7 @@
 
 - Canvas有许多属性，这里设定4种属性。
 
-  - `ctx.strokeStyle`定义画笔颜色，
+  - `ctx.strokeStyle`定义笔画颜色，
   - `ctx.lineJoin`定义两线相交时的拐角类型。miter 默认,尖角。bevel 斜角。round	 圆角。
   - `ctx.lineCap`定义结束端点样式。butt	默认。每个末端添加平直边缘。round	每个末端添加圆形线帽。square	每个末端添加正方形线帽。
   - `ctx.lineWidth`定义画笔粗细。
@@ -74,7 +74,7 @@
   - `ctx.beginPath()`绘制开始。
   - `ctx.moveTo(a,b)`起始位置。
   - `ctx.lineTo(a,b)`终点位置。
-  - `ctx.stroke()`   进行路径绘制。
+  - `ctx.stroke()`   进行笔画路径绘制。
 
 - 先定义最后的位置为`lastX, lastY`。`e.offsetX`表示事件当前坐标，可以定义`e.offsetX, e.offsetY`为每次的起始位置。
 
@@ -121,7 +121,7 @@
   let hue = 0;
 
   function draw(e){
-    ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;//重新定义颜色
+    ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;//重新定义笔画颜色
     ...
     hue++;
     if(hue>=360){
