@@ -58,7 +58,7 @@
   canvas.addEventListener('mouseout', ()=>isDrawing = false);//取消绘制
   ```
 
-> 05.定义监听处理函数，即绘制函数。
+> 05.定义事件处理函数，即绘制函数。
 
 - 定义`draw`方法。首先判定`isDrawing`是否为`true`，为`false`则返回。
 
@@ -136,7 +136,7 @@
 
 - 当`direction`为`ture`时，`ctx.lineWidth`递增，增加到100时把`direction`改成`false`。
 
-- 当`direction`为`ture`时，`ctx.lineWidth`递减，减到1时，把`direction`改成`true`。
+- 当`direction`为`false`时，`ctx.lineWidth`递减，减到1时，把`direction`改成`true`。
 
   ```javascript
   let direction = true;
