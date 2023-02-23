@@ -2,11 +2,11 @@
 
 ## 摘要
 
-本日要介紹Javascript付值時，何時是用copy，何時是用reference。
+本篇介绍Javascript赋值时，何时是用copy，何时是用reference。
 
-## 內容
+## 重点
 
-- 對變數來說:無論型別是`integer`, `String`及`boolen`都是**copy**。
+>01.对于变量，`integer`, `String`及`boolen`都是**copy**。
 
 ```javascript
 let age = 100;
@@ -16,7 +16,7 @@ age = 200
 console.log(age, age2); // 100, 200
 ```
 
-- 對陣列及物件來說，都是**Reference**
+>02.对于数组和对象，都是**Reference**
 
 ```javascript
 // Let's say we have an array
@@ -33,16 +33,16 @@ team[3] = 'Lux';
 console.log(players, team); //['Wes', 'Sarah', 'Ryan', 'Lux'], ['Wes', 'Sarah', 'Ryan', 'Lux']
 ```
 
-以下列出幾個可以**copy**陣列的方法。
+>03.以下列出几个复制数组的方法。---**Reference**
 
-- 利用`array.prototype.slice`:slice都會返回一個新的陣列(return a new array)。
+- `array.prototype.slice`:slice会返回新的数组。
 
-  補充說明 splice vs slice
+   splice vs slice
 
   ```javascript
   slice(begin, end):
 
-  ['a', 'b', 'c', 'd'].slice(1, 3) //['b'. 'c'] 是切除後回傳新的陣列。end不包含該項。
+  ['a', 'b', 'c', 'd'].slice(1, 3) //['b'. 'c'] 是切片后的新数组。end不包含该项。
 
   splice(index, howmany, additem):
 
@@ -55,11 +55,9 @@ console.log(players, team); //['Wes', 'Sarah', 'Ryan', 'Lux'], ['Wes', 'Sarah', 
   console.log(y) //['b', 'c', 'd']
   ```
 
-- `concat`:join array。可以創建一個空的然後`join`目標。return a new array。
+- `concat`:可以创建一个空的数组，并添加其他数组。会返回新的数组。
 
-- 利用`ES6 Spread`。
-
-- `Array.from()`:可以傳入`陣列`(array-like)or`String`轉換成陣列
+- 利用`ES6 的`Array.from()`：将类数组转换成数组。
 
   ```javascript
   const bar = ["b", "a", "r"];
@@ -79,14 +77,12 @@ const team4 = [...players];
 const team5 = Array.from(players);
 ```
 
-物件也是一樣的情況:**Reference**
+>04.复制对象的方法。---**Reference**
 
-> 解決辦法
-
-- `Object.assign({}, object)`，但是assign是只有one Level，若是有多層object則要利用其他方式。
-- `obj3 = JSON.parse(JSON.stringify(obj));`可以完整地複製物件。
-  - `JSON.stringigy`:物件轉String。
-  - `JSON.parse`:String轉物件。
+- `Object.assign({}, object)`，但是assign() 只是浅拷贝，不能复制深层对象。
+- `obj3 = JSON.parse(JSON.stringify(obj));`可以完整地复制对象。
+  - `JSON.stringigy`：对象转换成字符串。
+  - `JSON.parse`：字符串转换成对象。
 
 ```javascript
 const obj1 = {
@@ -100,10 +96,3 @@ const obj1 = {
 obj2 = Object.assign({}, obj1, {age:12}); //one level copy
 obj3 = JSON.parse(JSON.stringify(obj1)); //full copy
 ```
-
-簡單來說:就是變數付值都會是**copy**，陣列及物件時則會是**Reference**。
-
-這概念很簡單，但是在實作上常常會忽略，要熟記喔!
-
-> 今日課程到這邊結束囉!
-
