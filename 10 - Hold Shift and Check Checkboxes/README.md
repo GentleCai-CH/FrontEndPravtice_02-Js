@@ -13,7 +13,7 @@
 ```javascript
 const checkboxes = document.querySelectorAll('inbox input[type="checkbox"]');
 
-checkboxes.forEach(chechbox.addEventListener('click' , handleCheck));
+checkboxes.forEach(checkbox => checkbox.addEventListener('click', handleCheck));
 ```
 
 
