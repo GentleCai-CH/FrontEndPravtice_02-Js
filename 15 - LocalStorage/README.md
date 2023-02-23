@@ -2,29 +2,29 @@
 
 ## 摘要
 
-今日主要介紹兩個部分:
+本篇主要介绍两部分:
 
 - `LocalStorage`的使用。
-- `Event Delegate`的介紹
+- `Event Delegate`事件代理
 
-## 內容
+## 重点
 
-> 首先先來介紹LocalStorage
+>01.LocalStorage
 
-- `LocalStorage`:是一個在瀏覽器端作為`緩存`機制的存在。一般在瀏覽器端的儲存方式分為三種:`Cookie`, `LocalStorage`及`SessionStorage`。這邊以表格簡述一下其差異。可參考更多[Cookie vs LocalStorage vs SessionStorage](http://jerryzou.com/posts/cookie-and-web-storage/)
+- 浏览器三种缓存方式：`Cookie`, `LocalStorage`及`SessionStorage`。可参考三者差异[Cookie vs LocalStorage vs SessionStorage](http://jerryzou.com/posts/cookie-and-web-storage/)
 
   | 特性          | Cookie                                   | LocalStorage               | SessionStorage             |
   | ----------- | ---------------------------------------- | -------------------------- | -------------------------- |
-  | 生命週期        | 由Server端生成，可設置失效時間。若是browser生成，默認關閉browser後失效 | 除非被清楚，否則永久保存               | 當前有效，關閉頁面或瀏覽器刪除。           |
+  | 生命周期        | 由Server端生成，可设置失效时间。若是browser生成，默认browser关闭后失效 | 除非被清除，否则永久保存               | 当前有效，关闭页面或浏览器刪除。           |
   | 大小          | 4KB                                      | 5MB                        | 5MB                        |
-  | 與server通信狀況 | 每次送HTTP請求時皆會存在Header中。                   | 不參與Server通信                | 不參與Server通信                |
-  | 易用性         | 需自行封裝，原生API不好處理                          | 原生API難處理，可在封裝成object及array | 原生API難處理，可在封裝成object及array |
-  | 使用時機        | 用戶登入信息即可                                 | 可將購物車訊息從cookie移過來。         | 表單頁面處理。                    |
+  | 与server通信状况 | 每次发送HTTP请求时皆会存在Header中。                   | 不参与Server通信                | 不参与Server通信                |
+  | 易用性         | 需自行封裝，原生API难处理                          | 原生API难处理，可再封装成object及array | 原生API难处理，可再封装成object及array |
+  | 应用场景        | 用户登录                                 | 可将购物车信息cookie传送过来。         | 表单页面处理。                    |
 
-> 先實作輸入項目輸出在items內
+>02.举例：添加item
 
-- `e.preventDefault()`:此方法會取消當前DOM元素應該觸發的效果，如此例是取消`submit`的效果。
-- 當物件的`key` 和 `value的變數名稱`相同時，可以使用ES6的方法，只寫變數名稱即可。
+- `e.preventDefault()`:取消默认的触发效果，如取消`submit`的默认提交效果。
+- 当对象的`key` 和 `value`相同时，可以使用ES6的方法，只写单个名称即可。
 
 ```javascript
   function addItem(e){
@@ -40,13 +40,13 @@
   addItems.addEventListener('submit', addItem);
 ```
 
-此時應該可以在`console`內輸入`items`看到輸入的內容。
+可以在`console`内输入`items`检查。
 
-> 接下來要把items輸出在列表內
+>03.将items以列表形输出
 
-- 這邊先創建一個方法`populateList`，用來處理插入項目。
-- 應用`.map()`處理每一項的輸出，利用`join('')`，將陣列轉換為連續字串。
-- `this.reset()`:用來清空輸入欄位。
+- `populateList`处理添加的item。
+- 用`.map()`处理每一项的输出，利用`join('')`，将数组转换成连续字符串。
+- `this.reset()`:用來清空输入栏位。
 
 ```javascript
 function addItem(e){
@@ -60,7 +60,7 @@ function populateList(plates = [], platesList){
   platesList.innerHTML = plates.map((plate, i)=>{
     return `
     	<li>
-    		<input type="checkbox" data-index=${i} id="item${1}" ${plate.done ? 'checked' : ''}/> //若done為true則顯示checked，若無顯示空字串。
+    		<input type="checkbox" data-index=${i} id="item${1}" ${plate.done ? 'checked' : ''}/> //若done为true则显示checked，若无则显示空字符串。
     		<label for="item${i}">${plate.text}</label>
 		</li>
     `;
@@ -68,30 +68,33 @@ function populateList(plates = [], platesList){
 }
 ```
 
->最後要使用LocalStorage套入
+>04.使用LocalStorage
 
-- `LocalStorage.setItem('name', 'value')`:用來儲存。
-- `LocalStorage.getItem('name', 'value')`:用來取值。
-- 由於直接輸入陣列時，LocalStorage會直接輸入`{Object}`，所以我們在儲存時須使用`JSON.stringity`把物件轉為`string`儲存，並使用`JSON.parse()`取出為物件。
+- `LocalStorage.setItem('name', 'value')`:存入。
+- `LocalStorage.getItem('name', 'value')`:获取。
+- 直接输入数组时，LocalStorage会存入`{Object}`，所以需要使用`JSON.stringity`把对象转换为`string`存储，之后使用`JSON.parse()`将其转换为对象。
 
 ```javascript
-const items = JSON.parse(localStorage.getItem('items')) || []; //修改items讀取方式
+const items = JSON.parse(localStorage.getItem('items')) || []; //修改items读取方式
 function addItem(e){
   ...
   populateList(items, itemsList);
   localStorage.setItem('items', JSON.stringify(items));
 }
 ...
- populateList(items, itemsList);//記得要在最後插入這段，否則每次re-load之後還要按下submit才會出現資料!
+ populateList(items, itemsList);//需要在最后插入这段，否则每次re-load之后还要按下submit才会出现!
 ```
 
-目前應該可以看到輸入項目皆顯示出來囉!也可以檢查瀏覽器的LocalStorage是否有存值。
+目前可以看到item显示!也可以检查浏览器的LocalStorage是否有存值。
 
-> 接下來要介紹Event Delegate
+>
+>05.Event Delegate事件代理
 
-- `Event Delegate`:在一般時候，使用`event binding`即可達到每一個要求。`Event binding`主要是綁定特定DOM元素後透過註冊Event觸發DOM function達到效果。而Event Delegate則是綁定DOM的父元件而非子元件，讓子元件在更新後也可以透過父元件操作。
-- 最簡單的例子則是先用`Event binding`綁定子元件後新增元件，此時新增的元件並不會有已經綁定的事件。此時若透過`Event Delegate`綁定父元件，子元件也會被父元件綁定的事件觸發，事件會上傳給父元件，父元件會帶著子元件一同返回事件。
-- `toggleDone()`則是要利用此一特性，用`click`事件綁定`itemsList`(.plates)，當子元件('input')被`click`後會觸發toggleDone，此時印出`e.target`會發現返回`input`及`label`兩個元素。此時我們僅需要`input`元素，篩選`if (!e.target.matches('input')) return;`後把點擊的項目儲存後拿來改變`done`的值，並存入`LocalStorage`。
+- `Event Delegate`:一般使用`event binding`绑定特定DOM元素后注册Event监听器并触发DOM function即可。而Event Delegate则是绑定DOM的祖父元素，让子元素通过父元素触发处理函数。
+- 
+- 例子：先用`Event binding`绑定子元素后新增元素，新增的元素没有注册监听。此时通过`Event Delegate`绑定父元素，子元素事件冒泡后传给父元素，也会被父元素绑定的事件触发。
+- 
+- `toggleDone()`用`click`事件绑定`itemsList`(.plates)，子元素('input')被`click`后触发toggleDone，打印`e.target`会发现返回`input`及`label`两个元素。此时筛选`if (!e.target.matches('input')) return;`然后把点击的item储存起来切换`done`的值，并存入`LocalStorage`。
 
 ```javascript
   function toggleDone(e) {
@@ -103,5 +106,3 @@ function addItem(e){
     populateList(items, itemsList);
   }
 ```
-
-> 到這邊就完成今天的項目了!
