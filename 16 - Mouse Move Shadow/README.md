@@ -44,7 +44,7 @@ function shadow(e){
 
 
 
-- `this vs e.target`
+- `this` vs `e.target`
   - `this(e.currentTarget)`：在javascript中，若`DOM element`被事件绑定，`this`表示的是被绑定事件的那个元素，不是子元素；
   - `e.target`：则是表示被触发的那个`Dom element`。若事件被绑定在父元素，而触发的是子元素时，会回传子元素的内容。
 
@@ -63,7 +63,7 @@ function shadow(e){
 >03.设置动画
 
 - 定义`const walk`，作用是为整个`hero`提供动画显示的基准点。
-  - 以`const walk = 100`为例，先把 (实际的位置/全部的长度)*100 - (100 / 2)，这样会以中心点为(0.0)，左上及右下分別为(-50, -50)及(50,50)。
+  - 以`const walk = 100`为例， (实际的位置/全部的长度)*100 - (100 / 2)，这样会以中心点为(0.0)，左上及右下分別为(-50, -50)及(50,50)。
 - 用`text.style.textShadow`显示动画，参数分别表示:`x, y, blur, color(rgba)`。
 - `Math.round()`：取整。
 
