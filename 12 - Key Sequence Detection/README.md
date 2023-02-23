@@ -32,8 +32,9 @@ console.log(pressed)控制台观察。
   - `deleteCount`: 删除长度。
   - `additem`:从起始位置开始，要增加的元素。
 - 参数:
-  - 当`start`为`-1`时，起始位置表示最后一个，此时不会有元素删除，当起始位置为-2时才会删除最后一个；同理若要刪除第一个元素，则需设置起始位置为`-n -1`。即第一个元素的前面一个位置。
-  - 当`deleteCount`为负时不会删除。因此长度可以设置为`pressed.length-secret.length`，一开始keyup的东西不多时，为负数，不会删除。
+  - 当`start`为`-1`时，起始位置表示最后一个，此时不会有元素删除，当起始位置为-2时才会删除最后一个；
+  - 同理若要刪除第一个元素，则需设置起始位置为`-n -1`。即第一个元素的前面一个位置。
+  - 当`deleteCount`为负时不会删除。一开始keyup的东西不多时，为负数，因此长度可以设置为`pressed.length-secret.length`。
 
 ```javascript
 pressed.splice(-secretCode.length -1, pressed.length - secretCode.length);
