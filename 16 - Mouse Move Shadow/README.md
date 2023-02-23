@@ -2,11 +2,11 @@
 
 ## 摘要
 
-今日要實作的是滑鼠在圖片的四周移動，會產生不一樣的效果，會應用到`offset`的操作。
+本篇实现鼠标在图片四周移动，分别产生不同效果，运用到`offset`的操作。
 
-## 內容
+## 重点
 
->首先先建立監聽事件及選取元素
+>01.获取元素，设置监听
 
 ```javascript
   const hero = document.querySelector('.hero');
@@ -19,22 +19,20 @@
   hero.addEventListener('mousemove', shadow);
 ```
 
-此時應該可以在`console`看到回傳的內容。
 
-> 定義關注的參數。
-
-- 這邊會用到`ES6`的語法:
+>02.定义变量
 
   ```javascript
   const xxx = a.aaa;
   const yyy = a.bbb;
-  //可簡化為
+  //可简化为
   const { aaa:xxx, bbb:yyy} = a
   ```
 
-- `hero.offsetWidth`:顯示`.hero`原本的高度(不會因為滑鼠修正)。
+- `hero.offsetWidth`:显示`.hero`宽度(不会因为鼠标移动而改变)。
 
-- `e.offsetX 及 e.offsetY`才會是滑鼠移動時的位置。
+- `e.offsetX 及 e.offsetY`才是鼠标移动过程中的的位置。
+- 但是这里有一个问题：当鼠标移动到`h1`(const text)的区域时，会只计算`h1`内的坐标，而移出`h1`后又会恢复正常。所以计算`h1`内的坐标时需要加上`e.target.offsetLeft`及`e.target.offsetTop`
 
 ```javascript
 function shadow(e){
@@ -44,11 +42,11 @@ function shadow(e){
 }
 ```
 
-但是這邊出現一個問題：滑鼠移動時座標顯示都正常，但是當移到`h1`(const text)的區域時，會只計算`h1`內的座標，而移出`h1`的範圍時又會恢復正常。所以我們在計算`h1`內的座標時須加上`e.target.offsetLeft`及`e.target.offsetTop`
+
 
 - `this vs e.target`
-  - `this(e.currentTarget)`在javascript中，若`DOM element`被事件綁定，`this`代表的是該`Dom element`，儘管事件也有綁定到子元素，`this`還是代表被綁定的那個元素。
-  - `e.target`則是代表被觸發的那個`Dom element`。若事件被綁定在巢狀結構的父元件，當觸發的點是子元件時，會回傳子元件的內容。
+  - `this(e.currentTarget)`：在javascript中，若`DOM element`被事件绑定，`this`表示的是被绑定事件的那个元素，不是子元素；
+  - `e.target`：则是表示被触发的那个`Dom element`。若事件被绑定在父元素，而触发的是子元素时，会回传子元素的内容。
 
 ```javascript
   function shadow(e){
@@ -62,12 +60,12 @@ function shadow(e){
   }
 ```
 
->最後要處理動畫顯示。
+>03.设置动画
 
-- 先定義一個`const walk`，作用是在為整個`hero`提供一個動畫顯示的基準點。
-  - 以`const walk = 100`為例，我們會先把 (實際的位置/全部的長度)*100 - (100 / 2)，這樣會以中心點為(0.0)，左上及右下分別為(-50, -50)及(50,50)。
-- 要製作`const text`的動畫顯示這邊用`text.style.textShadow`:參數分別代表:`x, y, blur, color(rgba)`。
-- `Math.round()`:數字顯示到個位數。
+- 定义`const walk`，作用是为整个`hero`提供动画显示的基准点。
+  - 以`const walk = 100`为例，先把 (实际的位置/全部的长度)*100 - (100 / 2)，这样会以中心点为(0.0)，左上及右下分別为(-50, -50)及(50,50)。
+- 用`text.style.textShadow`显示动画，参数分别表示:`x, y, blur, color(rgba)`。
+- `Math.round()`：取整。
 
 ```javascript
 function shadow(e){
@@ -90,8 +88,5 @@ function shadow(e){
     `;
   }
 ```
-
-> 今天的項目比較簡單，主要是注意this&e.target的選擇，及注意座標位置的參數計算。
-
 
 
