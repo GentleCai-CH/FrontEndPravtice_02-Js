@@ -2,13 +2,14 @@
 
 ## 摘要
 
-今日要介紹照片的移入移出效果製作。當視窗移到照片的區域以動畫方式出現。
+本篇实现照片的移入移出效果。当窗口移到照片的区域以动画方式出现。
 
-## 內容
+## 重点
 
-> 首先先定義要選取的物件，並設定監聽事件。
+>01.获取元素，设置监听。
 
-- `Scroll`監聽事件:當移動右方scroll bar 時觸發，一般是鎖定在`window.addEventListener()`但是由於此事件的是發頻率會過多，所以一般會加以時間限制。這邊使用的是lodash的方法`debounce`，並將監聽設為20minisec
+- 移动右方scroll bar时触发`scroll`事件，一般是使用`window.addEventListener()`，但是该事件类型触发频繁，需要加时间限制。
+- 这里使用的是`lodash`的方法`debounce`，并将监听设置为20minisec
 
 ```javascript
 const sliderImages = document.querySelectorAll('.slide-in');
@@ -21,18 +22,18 @@ function checkslide(){
 window.addEventListener('scroll', debounce(checkSlide));
 ```
 
->接著要設置讀取照片位置的方法。
+>02.获取图片位置。
 
-- `window.scroll`:滑動時的上緣。
-- `window.innerHeight`:視窗的上下範圍。故`window.scroll+window.innerHeight`等於滑動時的下緣。
-- `sliderImage.height`:圖片本身的上下長度。
-- `slideInAt=window.scroll+window.innerHeight - sliderImage.height/2`代表滑下來時到圖片一半的全長度。
-- `sliderImage.offsetTop`:代表圖片上緣在全部頁面的高度。
-- `sliderImage.height`: 表圖片本身的高度。ㄈ ㄉ
-- `imageBottom = sliderImage.offsetTop + sliderImage.height;`:代表圖片底部在全部頁面的高度。
-- `isHalfShown = slideInAt > sliderImage.offsetTop;`:當畫面移動超過圖片本身的高度時顯示。
-- `const isNotScrolledPast = window.scrollY < imageBottom;`:當畫面移動時圖片的下緣高度未到視窗上緣時。
-- 當`isHalfShown&&isNotScrolledPast`皆存在時，代表視窗移動已經超過圖片的一半時，以及圖片的下緣還沒超過視窗上部時，添加動畫的class皆存在，當其中一個不存在時即取消。
+- `window.scroll`:滑动时顶部。
+- `window.innerHeight`:窗口高度。故`window.scroll+window.innerHeight`等于滑动时的底部。
+- `sliderImage.height`：图片高度。
+- `slideInAt=window.scroll+window.innerHeight - sliderImage.height/2`表示滑动到图片的一半高度。
+- `sliderImage.offsetTop`:表示图片顶部在文档的高度。
+- `imageBottom = sliderImage.offsetTop + sliderImage.height;`:表示图片底部在文档的高度。
+- `isHalfShown = slideInAt > sliderImage.offsetTop;`:当窗口移动超过图片高度时显示。
+- `const isNotScrolledPast = window.scrollY < imageBottom;`:窗口移动时，图片的底部高度未到窗口顶部时。
+- 
+- 当满足`isHalfShown&&isNotScrolledPast`时，表示窗口移动超过图片一半高度，且图片的底部高度还未超过窗口顶部，添加动画样式class，不满足两个条件时则移除动画。
 
 ```javascript
 function checkSlide() {
@@ -51,8 +52,3 @@ function checkSlide() {
       });
     }
 ```
-
->本日的課程就到此結束!
-
-
-
