@@ -102,7 +102,7 @@ ranges.forEach(range => range.addEventListener('change', handleRangeUpdate));
 ranges.forEach(range => range.addEventListener('mouseover', handleRangeUpdate));
 ```
 
->06. 处理播放bar的显示。
+>06. 处理进度条的显示。
 
 - 先获得进度条的比例位置：用`video.currentTime`获取当前值，除以`video.duration`(全长)，再乘以100。`const percent = (video.currentTime / video.duration) *100`
 - 控制进度条比例：设置`progressBar.style.flexBasis = ${percent}%`;
@@ -134,6 +134,6 @@ progress.addEventListener('mousemove', (e) => mousedown && scrub(e));
 progress.addEventListener('mousedown', () => mousedown = true);
 progress.addEventListener('mouseup', () => mousedown = false);
 ```
-
-> 试试全屏展示按钮的实现
+>
+> 尝试实现全屏展示按钮
 
