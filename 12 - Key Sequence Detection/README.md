@@ -7,7 +7,7 @@ Key Sequence关键字序列：输入一段密码后会出现特定的画面。
 
 ## 重点
 
->01. 定义一个数组存储每次键入的内容，定义密码字符串。当数组匹配密码即可产生特定内容。
+>01.定义一个数组存储每次键入的内容，定义密码字符串。当数组匹配密码即可产生特定内容。
 
 - 监听器用`window.addEventListener()`
 - `keyup`事件:按下键盘时触发。
@@ -25,7 +25,7 @@ window.addEventListener('keyup', (e) => {
 
 console.log(pressed)控制台观察。
 
->02. 限制pressed长度与secretCode一样，并把旧的内容弹出。
+>02.限制pressed长度与secretCode一样，并把旧的内容弹出。
 
 - `Array.prototype.splice`:(start, deleteCount, additem)。
   - `start`:起始位置，负数表示倒数。
@@ -39,7 +39,7 @@ console.log(pressed)控制台观察。
 pressed.splice(-secretCode.length -1, pressed.length - secretCode.length);
 ```
 
->03. 判断pressed和secretCode内容是否匹配，并呈现特定画面。
+>03.判断pressed和secretCode内容是否匹配，并呈现特定画面。
 
 - 用`.join()`方法把数组转换为字符串，
 - 用`.includes()`方法判断是否存在内容。
