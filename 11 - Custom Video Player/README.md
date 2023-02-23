@@ -61,7 +61,7 @@ toggle.addEventListener('click', togglePlay);
 
 ```javascript
 function updateButton(){
-	const icon = this.paused ? '►' : '❚ ❚';
+	const icon = this.paused ? '►' : '❚❚';
 	toggle.textContent = icon;
 }
 
