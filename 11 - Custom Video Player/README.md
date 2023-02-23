@@ -8,6 +8,29 @@
 
 >01. 首先获取每个元素
 
+```html
+<body>
+
+   <div class="player">
+     <video class="player__video viewer" src="./652333414.mp4"></video>
+
+     <div class="player__controls">
+       <div class="progress">
+        <div class="progress__filled"></div>
+       </div>
+       <button class="player__button toggle" title="Toggle Play">►</button>
+       <input type="range" name="volume" class="player__slider" min="0" max="1" step="0.05" value="1">
+       <input type="range" name="playbackRate" class="player__slider" min="0.5" max="2" step="0.1" value="1">
+       <button data-skip="-10" class="player__button">« 10s</button>
+       <button data-skip="25" class="player__button">25s »</button>
+     </div>
+   </div>
+
+  <script src="./scripts.js"></script>
+</body>
+```
+
+
 ```javascript
 const player = document.querySelector('.player'); //最外层的div
 const video = player.querySelector('.viewer'); //视频元素的div
