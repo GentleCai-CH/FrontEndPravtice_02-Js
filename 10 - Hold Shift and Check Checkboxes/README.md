@@ -2,23 +2,27 @@
 
 ## 摘要
 
-本篇主要是要實作透過點擊checkbox後按下shift鍵之後一次選取多個checkbox的功能。
+本篇主要是实现通过按下shift鍵和`click`选取多个checkbox的功能。
 
 
 
-## 內容
+## 重点
 
-> 首先先選取目標物並加入監聽事件`click`，並先定義 click後要施作的方法。
+>01.首先对checkbox定义事件监听
 
 ```javascript
 const checkboxes = document.querySelectorAll('inbox input[type="checkbox"]');
 
-checkboxes.forEach(chechbox.addEventListener('click' , handleCheck));
+checkboxes.forEach(checkbox => checkbox.addEventListener('click', handleCheck));
 ```
 
->撰寫handleCheck 方法。
 
-- 先來談一下邏輯的設置方式：`shift`的使用方式應該是在點擊`checkbox`後再按下`shift`，可以由`shiftKey`判定是否按下，當兩者皆啟動後，再點擊另外一個 `checkbox`才會出現效果，這邊可以先定義最後一個點擊的是`lastChecked`，而這邊用`inBetween`參數當做在兩個`checkbox` 之間的內容，若在兩個之間為`true`, 其他則會`false`。所以最後只要判斷`inBetween`為`true`時打勾即可。
+>02.定义处理函数handleCheck 方法。
+
+- 思路：
+  - `shift`是在点击`checkbox`后再按下，且可以由`shiftKey`判定是否按下，当两者满足时，再点击另一个`checkbox`出现效果；
+  - 可以先定义最后点击的是`lastChecked`，用`inBetween`表示两个`checkbox`之间的内容，若在两个之间则为`true`, 否则为`false`。
+  - 所以最后只要判断`inBetween`是否为`true`进行打勾即可。
 
 ```javascript
 let lastChecked;
@@ -38,8 +42,4 @@ function handleChecj(e){
   lastChecked = this
 }
 ```
-
-
-
-> 本篇原則上到這邊就結束了，本篇的項目沒有運用到新的方法，只有邏輯方面需要構思一下。
 

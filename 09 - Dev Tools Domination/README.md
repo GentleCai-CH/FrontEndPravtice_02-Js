@@ -2,33 +2,31 @@
 
 ## 摘要
 
-本篇主要介紹幾個常用的`dev tool`，可以增加您在開發`javascript`的除錯速度。
+本篇主要介绍console的几个常用方法，可以增加开发效率。
 
-## 內容
+## 重点
 
-> 輸出內容
+> 01.输出打印`console.log()`
+  - 应用字符串格式化：`console.log('hello %s', 'world');`
+  - 应用css样式：`console.log('%c hello world', 'font-size:50px');`
+- 其他显示:
+  - `console.warn('hello world')`:警告显示
+  - `console.error('hello world')`:错误显示
+  - `console.info('hello world')`:信息显示
 
-- `console.log()`:顯示在console內。
-  - 也可用替代字符的方式`console.log('hello %s', 'world');`
-  - 或是加入css`console.log('%c hello world', 'font-size:50px');`
-- 除了一般的顯示外，還提供幾種顯示的警示:
-  - `console.warn('hello world')`:警示符號
-  - `console.error('hello world')`:錯誤符號
-  - `console.info('hello world')`:資訊符號
+> 02.断言测试
 
-> 可以當作測試使用
+- `console.assert()`若第一参数为`false`，則会输出第二参数。`console.assert( 1 ===2 , 'This is false');`。
 
-- `console.assert()`若第一參數為`false`，則會輸出第二參數內容。`console.assert( 1 ===2 , 'This is false');`。
+> 03.清除画面
 
-> 清除畫面
+- `console.clear()`:清除console画面。
 
-- `console.clear()`:清除console畫面。
+> 04.查看dom元素的属性
 
-> 查看被選取dom元素的資料內容
+- `console.dir()`:可以查看被选取的dom元素的属性。
 
-- `console.dir()`:可以查看被選取的dom元素屬性。
-
-> Group資料。
+> 05.Group信息。
 
 ```javascript
    dogs.forEach(dog => {
@@ -40,14 +38,14 @@
     });
 ```
 
-> 計算次數
+> 06. 计算次数
 
-- `console.count()`:可以計算參數內出現的次數。
+- `console.count()`:可以计算参数出现的次数。
 
-> 計算執行時間
+> 07.计算执行时间
 
-- `console.time()`:可以計算`console.time('hello world')`到`console.timeEnd('hello world')`的執行時間。
+- 可以计算`console.time('hello world')`到`console.timeEnd('hello world')`的执行时间。
 
-> 把陣列輸出成table型式
+> 08.将array转换成table形式
 
-- `console.table(dog)`:把array用表格型式輸出。
+- `console.table(dog)`:把array用表格形式输出。
