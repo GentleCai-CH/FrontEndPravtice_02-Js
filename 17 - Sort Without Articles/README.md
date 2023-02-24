@@ -22,7 +22,7 @@ document.querySelector('#bands').innerHTML =
 
 >02.排序：不考虑a, an 及the
 
-- 利用正则表达式排序，为了避免改变数组内容，仅在比较时排序。
+- 利用正则表达式进行排序，为了避免改变数组内容，仅在比较时排序。
 - `String.prototype.replace`:字符串内容，通常会使用正则表达式。
 - `String.prototype.trim()`:消除字符串左右`空白`。
 
