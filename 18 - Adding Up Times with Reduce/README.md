@@ -6,7 +6,7 @@
 
 ## 重点
 
->01.用`.map()`方法选取时间后，再利用`.map()`方法把时间计算成秒，接着用`.reduce()`把全部加起来，并切分成时:分:秒。
+>01.用`.map()`方法对元素逐一选取时间后，再利用`.map()`方法把时间计算成秒，接着用`.reduce()`把全部加起来，并切分成时:分:秒。
 
 - 使用`document.querySelectorAll('')`时，获取到的是`NodeList`，需要使用`forEach()`。
 - 
@@ -20,6 +20,20 @@
 - `Math.floor()`:向下取整。
 - `String.prototype.split('arg')`：按照参数切割字符串。
 - `Number.parseFloat`:把字符串(String)转换成数值(Int)类型。
+
+```html
+ <ul class="videos">
+    <li data-time="5:43">
+      Video 1
+    </li>
+    <li data-time="2:33">
+      Video 2
+    </li>
+    <li data-time="3:45">
+      Video 3
+    </li>
+   ...
+   ```
 
 
 ```javascript
