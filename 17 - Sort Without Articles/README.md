@@ -2,7 +2,7 @@
 
 # 摘要
 
-本篇通过编排文章排序复习`sort`, `map`, `join` 及`replace`, `trim`等方法的使用。
+本篇通过编排文章的排序，复习`sort`, `map`, `join` 及`replace`, `trim`等方法的使用。
 
 ## 重点
 
