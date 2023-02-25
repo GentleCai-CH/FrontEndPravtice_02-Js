@@ -56,8 +56,10 @@ triggers.forEach(a => a.addEventListener('mouseenter', highlightLink));
 
 此时可以看到效果
 
-但是当文档下移时位置发生改变!原因是`getBoundingClientRect()`获取的是窗口的相对位置，
-还需要加上window的滑动距离。`DOMRect.left + window.scrollX`及`DOMRect.left + window.scrollY`
+>03.加上窗口滑动距离
+
+- 当文档下移时位置会发生改变!原因是`getBoundingClientRect()`获取的是窗口的相对位置，
+- 因此需要加上window的滑动距离。`DOMRect.left + window.scrollX`及`DOMRect.left + window.scrollY`
 
 ```javascript
     function highlightLink(){
