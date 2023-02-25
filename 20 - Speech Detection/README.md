@@ -2,20 +2,20 @@
 
 ## 摘要
 
-今日要介紹如何使用browser內建的**語音轉換API**`web speech api`。須注意和昨日相同，需要同意授權使用麥克風才能使用API，同理也需要建置本地端伺服器。
+本篇使用原生的**语音转换API**`web speech api`。同样需要创建本地服务器和同意麦克风使用权限。
 
-## 內容
+## 重点
 
-**記得先架設本地端伺服器。**
+>01.需要先建立一个localhost服务器
 
 `npm install`, `npm run start`。
 
-> 首先我們先建立一個語音識別的物件，並賦值。
+>02.新建语音识别对象，并赋值。
 
-- `window.SpeechRecognition`:驅動語音轉換的API。
-- `window.webkitSpeechRecognition`:Firefox用語音轉換API。
-- `recognition.interimResults = true`:控制語音辨識期間是否返回，若為`true`會一直返回，若`SpeechRecognitionResult.isFinal`為`true`時，即結束當前對話。
-- `recognition.lang = 'en-US';`可以設定辨識語言。繁體中文:`zh-tw`。
+- `window.SpeechRecognition`:触发语音转换API。
+- `window.webkitSpeechRecognition`:Firefox浏览器语音转换API。
+- `recognition.interimResults = true`:控制语音识别过程中是否返回，若为`true`则一直返回，若`SpeechRecognitionResult.isFinal`为`true`时，表示結束当前对话。
+- `recognition.lang = 'en-US';`设置识别语言。繁体中文:`zh-tw`，简体中文：。
 
 ```javascript
   window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -25,10 +25,10 @@
   recognition.lang = 'en-US';
 ```
 
-> 添加輸出元素到頁面上，並加入監聽事件result。
+>03.添加元素到文档上，监听result事件。
 
 - `.appendChild()`:添加元素。
-- `recognition.start()`:開始監聽。
+- `recognition.start()`:开始监听。
 
 ```javascript
   let p = document.createElement('p');
@@ -42,15 +42,15 @@
   recognition.start();
 ```
 
-此時對著麥克風說話應該可以在`console`看到回傳的事件`SpeechRecognitionEvent`。
+此时对着麦克风说话可以在`console`看到回传的事件e：SpeechRecognitionEvent`。
 
-打開事件後可以發現`results[0][transcript]`內看到轉換的內容。
+打开事件后，`results[0][transcript]`内可以看到转换的内容。
 
-> 接著我們要編輯回傳的事件。
+>04.处理回传的事件e
 
-- 取得`results`的內容。並重新排列成字串。
-- 接著若語音暫停，則會另外創造一個段落。語音暫停可以用`e.result[0].isFianl=true`得知。
-- 若暫停之後則須重啟，須增加監聽事件`  recognition.addEventListener('end', recognition.start);`並重新啟動。
+- 获取`results`的内容。重新排列成字符串。
+- 语音暂停，另起一个段落。语音可以用`e.result[0].isFianl=true`判断。
+- 暂停后重启：须增加监听`  recognition.addEventListener('end', recognition.start);`，并重新启动。
 
 ```javascript
   recognition.addEventListener('result', e =>{
@@ -68,14 +68,16 @@
   recognition.addEventListener('end', recognition.start);
 ```
 
-內容到這邊就差不多結束了。另外wesbos另外增加了一個功能，若提到`poop, poo, shit, dump`則會自動轉換成圖樣。
+>05.增加功能
+- 提到`poop, poo, shit, dump`自动转换成其他字符
+
 
 ```javascript
       const poopScript = transcript.replace(/poop|poo|shit|dump/gi, '💩');
       p.textContent = poopScript;
 ```
 
-> 今日項目就到這邊為止。以下是完整程式碼
+> 完整代码
 
 ```javascript
 <script>
