@@ -10,7 +10,11 @@
 
 ## 重点
 
->01.调用`Navigator.geolocation`获取位置。
+>01.需要先建立一个localhost服务器
+
+npm install, npm run start。
+
+>02.调用`Navigator.geolocation`获取位置。
 
 - `Navigator.geolocation.getPosition()`：单次获取当前地理位置。
 - `Navigator.geolocation.watchPosition(data, err)`：连续监测当前地理位置。利用`data.coords.{property}`可以取得数据。第二个参数err是失败时传入`callback`的错误信息。
