@@ -10,7 +10,7 @@
 
 `npm install`, `npm run start`。
 
->02.新建语音识别对象，并赋值。
+>02.新建语音识别对象实例，并赋值。
 
 - `window.SpeechRecognition`：触发语音识别API。
 - `window.webkitSpeechRecognition`：Firefox浏览器语音识别API。
