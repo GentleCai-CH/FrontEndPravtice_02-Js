@@ -17,11 +17,12 @@ npm install, npm run start。
 >02.调用`Navigator.geolocation`获取位置。
 
 - `Navigator.geolocation.getPosition()`：单次获取当前地理位置。
-- `Navigator.geolocation.watchPosition(data, err)`：连续监测当前地理位置。利用`data.coords.{property}`可以取得数据。第二个参数err是失败时传入`callback`的错误信息。
-  - `accurency`":当前位置的精確度。
-  - `latitude`及`longitude`:经纬度。
-  - `heading`:当前位置指向。
-  - `speed`:当前速度。
+- `Navigator.geolocation.watchPosition(data, err)`：连续监测当前地理位置。利用`data.coords.xxx`可以取得数据。第二个参数err是失败时传入`callback`的错误信息。
+- `data.coords.xxx`
+  - `accurency`"：当前位置的精确度。
+  - `latitude`及`longitude`：经纬度。
+  - `heading`：当前位置指向。
+  - `speed`：当前速度。
 - 使用`element.style.transform = rotate()`的方式旋转指针。
 
 ```javascript
