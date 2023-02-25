@@ -25,7 +25,7 @@
   recognition.lang = 'en-US';
 ```
 
->03.添加元素到文档上，监听result事件。
+>03.添加元素到文档上，监听`result`事件。
 
 - `.appendChild()`:添加元素。
 - `recognition.start()`:开始监听。
