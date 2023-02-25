@@ -5,7 +5,7 @@
 本篇使用原生的Javascript触发电脑摄像头`webcam`，并输出到`canvas`上，用`canvas`进行拍照及特效处理。
 
 ## 重点
-
+>
 >01.需要先建立一个localhost服务器。
 
 - 要调用的`getUserMedia()`api需要在`安全域名(secure origin)`下使用。即包含`HTTPS`, `Localhost`等。[可參考文件](https://www.chromium.org/Home/chromium-security/prefer-secure-origins-for-powerful-new-features)
@@ -132,7 +132,7 @@ function takePhoto() {
 
 其实只是处理RGB的像素，输入的`pixels.data[]`数组内分別以`red(data[i]), green(data[i+1]), blue(data[i+2]), alpha(data[i+3])`排列。故`i+=4`。
 
-##### redEffect()
+##### 1. redEffect()
 
  - 把red的项目加深处理，蓝绿的项目分别-50和减半。
 
@@ -163,7 +163,7 @@ return setInterval(() => {
 	}, 16);
 ```
 
-##### rgbSplit()
+##### 2. rgbSplit()
 
 - 将rgb像素分离。
 
@@ -181,7 +181,7 @@ function rgbSplit(pixels) {
 同样在`paintToCanvas()`内获取`ImageData`加入。
 
 
-##### greenScreen()
+##### 3. greenScreen()
 
 - 最后是greenScreen，先取消html内注释部分。可以看到六個`range` bar。分別代表rgb的数值。
 
