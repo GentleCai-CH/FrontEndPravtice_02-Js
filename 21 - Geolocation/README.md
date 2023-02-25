@@ -6,7 +6,7 @@
 
 同样需要安全域名(secure origin)，所以也要用`https`或是`localhost`。
 
-建议使用手机模拟器或手机使用此功能。Mac用戶可以用[Xcode](https://developer.apple.com/xcode/)模拟。
+建议使用手机模拟器或手机使用此功能。Mac用户可以用[Xcode](https://developer.apple.com/xcode/)模拟。
 
 ## 重点
 
