@@ -2,7 +2,7 @@
 
 ## 摘要
 
-本篇使用原生的**语音转换API**`web speech api`。同样需要创建本地服务器和同意麦克风使用权限。
+本篇使用原生的**语音识别API**`web speech api`。同样需要创建本地服务器和同意麦克风使用权限。
 
 ## 重点
 
@@ -12,9 +12,9 @@
 
 >02.新建语音识别对象，并赋值。
 
-- `window.SpeechRecognition`:触发语音转换API。
-- `window.webkitSpeechRecognition`:Firefox浏览器语音转换API。
-- `recognition.interimResults = true`:控制语音识别过程中是否返回，若为`true`则一直返回，若`SpeechRecognitionResult.isFinal`为`true`时，表示結束当前对话。
+- `window.SpeechRecognition`：触发语音识别API。
+- `window.webkitSpeechRecognition`：Firefox浏览器语音识别API。
+- `recognition.interimResults = true`:控制语音识别过程中是否返回，若为`true`则一直返回，若`SpeechRecognitionResult.isFinal`为`true`时，表示当前对话结束。
 - `recognition.lang = 'en-US';`设置识别语言。繁体中文:`zh-tw`，简体中文：。
 
 ```javascript
@@ -28,7 +28,7 @@
 >03.添加元素到文档上，监听`result`事件。
 
 - `.appendChild()`:添加元素。
-- `recognition.start()`:开始监听。
+- `recognition.start()`:开始启动识别。
 
 ```javascript
   let p = document.createElement('p');
