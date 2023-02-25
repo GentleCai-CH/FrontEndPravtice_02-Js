@@ -2,23 +2,23 @@
 
 ## 摘要
 
-本日要介紹如何使用`Navigator.geolocation`的API去擷取當前的地理位置狀況，包含 指向 及 速度，詳情可以參考[Web API](https://developer.mozilla.org/zh-TW/docs/Web/API/Navigator/geolocation)。
+本篇使用`Navigator.geolocation`的API去获取当前地理位置，包含 经纬度、指向 及 速度，參考[Web API](https://developer.mozilla.org/zh-TW/docs/Web/API/Navigator/geolocation)。
 
-另外此項目一樣要取得安全同源(secure origin)，所以一樣要用`https`的方式或是`localhost`。
+同样需要安全域名(secure origin)，所以也要用`https`或是`localhost`。
 
-建議使用模器裝置模擬手機設備或是直接用手機使用此功能。Mac用戶可以用[Xcode](https://developer.apple.com/xcode/)去設定模擬。
+建议使用手机模拟器或手机使用此功能。Mac用戶可以用[Xcode](https://developer.apple.com/xcode/)模拟。
 
-## 內容
+## 重点
 
-通過調用`Navigator.geolocation`的方法去擷取資訊。
+>01.调用`Navigator.geolocation`获取位置。
 
-- `Navigator.geolocation.getPosition()`:用以一次性地取得當前的地理位置。
-- `Navigator.geolocation.watchPosition(data, err)`:用以監控的方式連續取得當前地理位置。利用`data.coords.{property}`可以取得資訊。第二個參數若失敗會執行的`callback`錯誤訊息。
-  - `accurency`":目前位置的精確度。
-  - `heading`:目前位置指向。
-  - `latitude`及`longitude`:經度及緯度。
-  - `speed`:當前速度。
-- 另外使用`element.style.transform = rotate()deg`的方式旋轉指針。
+- `Navigator.geolocation.getPosition()`:一次性获取当前地理位置。
+- `Navigator.geolocation.watchPosition(data, err)`:连续监测当前地理位置。利用`data.coords.{property}`可以取得数据。第二个参数err是失败时传入`callback`错误信息。
+  - `accurency`":当前位置的精確度。
+  - `latitude`及`longitude`:经纬度。
+  - `heading`:当前位置指向。
+  - `speed`:当前速度。
+- 使用`element.style.transform = rotate()`的方式旋转指针。
 
 ```javascript
   const arrow = document.querySelector('.arrow');
@@ -33,6 +33,4 @@
     alert('You should ACCESS the permission!')
   });
 ```
-
-> 今天的練習就到這邊為止!
 
