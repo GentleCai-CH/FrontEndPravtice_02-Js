@@ -37,7 +37,7 @@ triggers.forEach(a => a.addEventListener('mouseenter', highlightLink));
   - height：元素高度。( = botton - top)
   - top：元素顶部距离。(=y or y+height)
   - left：元素左边距离。(=x or x+width)
-    - botton：元素底边距离。(=y or y+height)
+  - botton：元素底边距离。(=y or y+height)
   - right元素右边距离。(=x or x+width)
   - x：该元素的x坐标
   - y：该元素的y坐标
