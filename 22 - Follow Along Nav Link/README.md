@@ -1,26 +1,20 @@
-# Follow Along Link Highlight
+# Follow Along Nav Link
 
 ## 摘要
 
-今日要練習的是動畫效果，當游標移往含有`a`的element時，加入`span`，並在`span`在加入style用css做出反白的動畫效果。
+本篇涉及动画效果，当鼠标移动到`a`上时，加入`span`，并在`span`加入style，做出白色背景动画效果。
 
-## 內容
+## 重点
 
-今日的運作流程:
+>01.监听事件`(mouseenter)`。
 
-1. 建立監控項目`(mouseenter)`。
-2. 監控項目加入動畫效果。
-3. 修正動畫效果。
+- `mouseenter`：鼠标进入时触发。`mouseover` vs `mouseenter`:[比较](http://api.jquery.com/mouseover/)
+  - `mouseenter`：只有鼠标进入时的元素会触发。
+  - `mouseover`：元素的子元素被指到时也会触发。
 
-> 建立監控項目`(mouseenter)`。
-
-- `mouseenter`:當滑鼠移往該項目時驅動。
-  - `mouseover` vs `mouseenter`:[詳見比較](http://api.jquery.com/mouseover/)
-    - `mouseover`:當項目的子項目被指到時也會驅動。
-    - `mouseenter`:只會受當下的項目(bound element)影響。
 
 ```javascript
-const triggers = documentSelectorAll('a');
+const triggers = document.querySelectorAll('a');
 const highlight = document.createElement('span');
 highlight.classList.add('highlight');
 document.body.appendChild(highlight);
@@ -31,20 +25,22 @@ function highlightLink(){
 triggers.forEach(a => a.addEventListener('mouseenter', highlightLink));
 ```
 
-此時用瀏覽器開啟後在`body`的最底部應該可以看到`<span class="highlight"></span>`以及當游標移往`a`的項目時在console可以看到該項目。
+在`body`的最底部可以看到`<span class="highlight"></span>`，以及当鼠标移动到`a`元素上时，可以在console可以看到该元素。
 
-> 監控項目加入動畫效果
+>02.动画效果
 
-- `this.getBoundingClientRect()`回傳`DOMRect物件`可以取得當前項目的位置資料。[可參考](https://developer.mozilla.org/en-US/docs/Web/API/DOMRect)
-  - botton:項目底部到當前視窗上緣的距離。(=y or y+height)
-  - height:項目本身的高度。( = botton - top)
-  - left:項目左邊到視窗當前最左的距離。(=x or x+width)
-  - right:項目右邊到視窗最左的距離。(=x or x+width)
-  - top:項目頂部到到視窗當前上緣的距離。(=y or y+height)
-  - width:項目本身寬度。( = right - left)
-  - x:該項目在視窗中的x距離
-  - y:該項目在視窗中的y距離
-- `translate(x, y)`:從原本項目移動x,y距離。
+- `this.getBoundingClientRect()`回传`DOMRect对象`，可以获取当前元素的位置。[參考](https://developer.mozilla.org/en-US/docs/Web/API/DOMRect)
+- 
+- `translate(x, y)`：元素平移。
+- 
+  - width：元素宽度。( = right - left)
+  - height：元素高度。( = botton - top)
+  - top：元素顶部距离。(=y or y+height)
+  - left：元素左边距离。(=x or x+width)
+  - botton：元素底边距离。(=y or y+height)
+  - right元素右边距离。(=x or x+width)
+  - x：该元素的x坐标
+  - y：该元素的y坐标
 
 ```javascript
     function highlightLink(){
@@ -52,18 +48,18 @@ triggers.forEach(a => a.addEventListener('mouseenter', highlightLink));
       const linkCoords = this.getBoundingClientRect();
       // console.log(linkCoords);
 
-      highlight.style.width = `${linkCoords.width}px`;// 在span內加入style.width
-      highlight.style.height = `${linkCoords.height}px`;// 在span內加入style.height
-      highlight.style.transform = `translate(${linkCoords.left}px, ${linkCoords.top}px)`;// 在span內加入style.transform效果。translate(x, y);
+      highlight.style.width = `${linkCoords.width}px`;// 在span内加入style.width
+      highlight.style.height = `${linkCoords.height}px`;// 在span内加入style.height
+      highlight.style.transform = `translate(${linkCoords.left}px, ${linkCoords.top}px)`;// 在span内加入style.transform效果。
     }
 ```
 
-此時應該可以看到效果了!
+此时可以看到效果
 
-但是會發現當視窗往下移時顯示位置會無法對應!原因是因為使用`getBoundingClientRect()`取得是當前視窗的{相對距離}，我們還需要加上window本身的{絕對距離}。所以我們要家`DOMRect.left + window.scrollX`及`DOMRect.left + window.scrollY`搭配使用。
+>03.加上窗口滑动距离
 
-- `window.scrollY`:視窗已經被移動過的上緣距離。
-- `window.scrollX`:視窗已經被移動過的左緣距離。
+- 当文档下移时位置会发生改变!原因是`getBoundingClientRect()`获取的是窗口的相对位置，
+- 因此需要加上window的滑动距离。`DOMRect.left + window.scrollX`及`DOMRect.left + window.scrollY`
 
 ```javascript
     function highlightLink(){
@@ -83,9 +79,8 @@ triggers.forEach(a => a.addEventListener('mouseenter', highlightLink));
     }
 ```
 
-> 今日項目就到今天為止囉!
->
-> 另外附上完整原始碼
+
+> 完整代码
 
 ```javascript
   <script>

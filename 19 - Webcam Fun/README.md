@@ -2,39 +2,44 @@
 
 ## 摘要
 
-今日要使用原生的Javascript來驅動`webcam`來紀錄影像資訊，並輸出到`canvas`上，並用`canvas`對圖像進行拍照及濾鏡處理。
+本篇使用原生的Javascript触发电脑摄像头`webcam`，并输出到`canvas`上，用`canvas`进行拍照及特效处理。
 
-## 內容
+## 重点
+>
+>01.需要先建立一个localhost服务器。
 
-> 在驅動webcam前我們須先建立一個localhost服務器。
+- 要调用的`getUserMedia()`api需要在`安全域名(secure origin)`下使用。即包含`HTTPS`, `Localhost`等。[可參考文件](https://www.chromium.org/Home/chromium-security/prefer-secure-origins-for-powerful-new-features)
 
-我們要調用的`getUserMedia()`api需要在`安全連線(secure origin)`下使用。安全連線主要是包含要有`HTTPS`, `Localhost`等。[可參考文件](https://www.chromium.org/Home/chromium-security/prefer-secure-origins-for-powerful-new-features)
+- `browser-sync`，可以在本地架设server的插件。用node.js的`npm`来安装`browser-sync`
+- 
+- - 若还没有安裝node.js，先下载安装[node.js](https://nodejs.org/en/)。
+- `npm`的相关指令，可以在[node.js](https://nodejs.org/en/)上查找，`npm`执行的内容主要是依照`package.json`的脚本，如文件夹内的`package.json`。
+- 
+- `devDependencies`将要下载的依赖包，会处理相关的依赖关系。
+- `scripts`是可执行的指令。用法:`npm run {scripts}`，如`npm run start`。
 
-而在文件中已經有提供了架設server的方法。我們會利用`npm`來安裝`browser-sync`一個可以在本地端架設server的套件。首先我們先確定本機端已經安裝了node.js，若還沒有，則請到[node.js](https://nodejs.org/en/)下載。
 
-下載後可以執行`npm`的相關指令，可以在[node.js](https://nodejs.org/en/)上查找，`npm`執行的內容主要是依照`package.json`的腳本產生，你可以看到在資料夾內有個`package.json`檔案。
-
-- `devDependencies`是會下載的套件。並會處理相依關係。
-- `scripts`是可執行的指令。用法:`npm run {scripts}`，如`npm run start`。
-
-所以請在command端執行以下步驟
+-在命令行工具执行以下命令
 
 ```javascript
-npm install //安裝package.json內的套件
-npm run start //開啟browser-sync 套件。系統會自動啟動。可以點及ctrl+右鍵點及連結。
+npm install //安装package.json内的依赖包
+npm run start //开启browser-sync 插件，按ctrl+右键连接。
 ```
 
->接者介紹一下預設好的配置
+>02.定义变量
 
-- `video`:原始鏡頭的位置
-- `canvas`:擷取鏡頭的內容渲染在畫布上，也是特效會呈現的位置。
-- `strip`:產生圖檔的位置。
-- `snap`:點擊照相時產生的音效(click)。
+- `video`:原始镜头的位置
+- `canvas`:画布，呈现截图和特效的位置。
+- `strip`:产生图像的位置。
+- `snap`:点击照相时产生的音效(click)。
 
-> 首先先取得webcam的使用。
+>03.获取webcam设备。
 
-- 用`navigator.mediaDevices.getUserMedia()`取得攝影鏡頭的權限。會返回一個`promise`對象。若是點選允許，則會回傳一個`resolved`狀態並回調函數為一個`MediaStream`物件。若是點選拒絕(deny)，會回傳一個`Reject`狀態，且以`PermissionDeniedError`的回調函數。所以會用`.then`處理成功訊息，用`catch`處理失敗訊息。
-- `window.URL.createObjectURL(localMediaStream)`:用於建立一個帶有URL的`DOMString`，代表參數值中傳入的物件。該URL的生命週期與創造它的window一致。新的物件代表所指定的`File`物件或是`Blob`物件
+- 用`navigator.mediaDevices.getUserMedia()`获取摄像头权限。会返回一个`promise`對象。
+- 
+- 若是选择允许，则传回`resolved`状态，resolved信息为`MediaStream`对象。若是选择拒绝(deny)，则传回`Reject`状态，调用`PermissionDeniedError`回調。
+- 
+- `window.URL.createObjectURL(localMediaStream)`：创建一个带有URL的`DOMString`，表示传入参数的对象。该URL的生命周期与创建它的window一致。新的对象表示指定的`File`对象或`Blob`对象
 
 ```javascript
 function getVideo(){
@@ -51,16 +56,16 @@ function getVideo(){
 getVideo();
 ```
 
-此時應該可以在瀏覽器看到權限請求，點擊允許後可以在右上角看到攝像頭。
+此时可以看到权限请求，点击允许后可以看到摄像头。
 
-> 接者要把擷取的資料放到Canvas畫布上
+>04.将截图放到Canvas画布上
 
-- 先固定畫布的大小。
-- `setInterval(function(){}, minSecs)`:設定運行頻率。單位為mini secs。
-- `ctx.drawImage()`:能將畫面擷取下來。`drawImage(img, x, y, width, heigth)`
-- `ctx.getImageData()`:反回一個ImageData對象，用來描述canvas區域內的像素數據。`getImageData(x, y, width, height)`。
-- `ctx.putImageData()`:將數據從已有的ImageData對象繪製到圖像的方法。`putImageData(img, x, y)`。
-- 綁定事件`canplay`:當攝影頭準備使用時觸發(已完成buffer程序可隨時開始)。
+- 定义画布尺寸。
+- `setInterval(function(){}, ms)`:设置运行频率。单位为毫秒。
+- `ctx.drawImage(img, x, y, width, heigth)`：获取截图。
+- `ctx.getImageData(x, y, width, height)`：返回ImageData对象，表示canvas区域内的像素数据。
+- `ctx.putImageData(img, x, y)`：将ImageData对象的数据绘制到图像。
+- 绑定事件`canplay`：摄像头开始使用时触发(已完成buffer程序可随时开始)。
 
 ```javascript
 function paintToCanvas(){
@@ -71,10 +76,9 @@ function paintToCanvas(){
 
 	return setInterval(() => {
 		ctx.drawImage(video, 0, 0, width, height);
-		//take the pixels out
+		
 		let pixels = ctx.getImageData(0, 0, width, height);
 
-		//put them back
 		ctx.putImageData(pixels, 0, 0);
 	}, 16);
 }
@@ -82,13 +86,15 @@ getVideo();
 video.addEventListener('canplay', paintToCanvas);
 ```
 
-在擷取檔案`ctx.getImageData`及放回檔案`ctx.putImageData(pixels, 0, 0);`之間我們可以對`ImageData`做些自訂濾鏡效果。ImageData包含了大量的數據，其中包括了rbga值(red, blue, green, alpha)。a用來顯示不透明度(opacity)，1為飽滿0為透明。
+>05.添加滤镜
+- 在获取图像`ctx.getImageData`及放回图像`ctx.putImageData(pixels, 0, 0);`过程中，可以对`ImageData`定制滤镜效果。
+- ImageData包含了大量的数据，其中包括rbga值(red, blue, green, alpha)。
 
-> 製作拍照功能。
+>06.拍照功能
 
-拍照分兩部分處理:
+拍照分两部分处理:
 
-1. 按下後產生聲音。
+1. 按下后产生声音
 
 ```javascript
 function takePhoto(){
@@ -97,21 +103,21 @@ function takePhoto(){
 }
 ```
 
-2. 擷取畫面。
+2. 获取截图
 
-- `canvas.toDataURL('image/jpeg')`:方法返回包括圖片展示的URL, type可在參數內自訂。[詳細可參考文檔](https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLCanvasElement/toDataURL)
-- 我們可以創建一個a元素，並設置href值，插入文檔中，可以看到截圖效果。
-- 若想要設置下載功能:`link.setAttribute('download', 'fileName');`
-- `strip.insertBefore`:插入功能。`strip.insertBefore(data, location)`。
+- `canvas.toDataURL('image/jpeg')`:返回URL, type可在参数内自定。[参考](https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLCanvasElement/toDataURL)
+- 创建一个a元素，并设置href值，插入文档中，可以看到截图效果。
+- 若想要设置下载功能:`link.setAttribute('download', 'fileName');`
+- `strip.insertBefore(data, location)`：插入节点。
   - location使用:`firstChild`, `lastChild`, `childNode[key]`。
 
 ```javascript
 function takePhoto() {
-  // played the sound
+  // 音效
   snap.currentTime = 0;
   snap.play();
 
-  // take the data out of the canvas
+  // 从画布取出数据
   const data = canvas.toDataURL('image/jpeg');
   const link = document.createElement('a');
   link.href = data;
@@ -121,15 +127,14 @@ function takePhoto() {
 }
 ```
 
-此時應該可以時做拍照，及下載功能。
 
-> 最後要來處理特效功能。
+>07.特效功能。
 
-效果處理方式其實只是把RGB的像素加工，輸入的`pixels.data[]`陣列內分別以`red(data[i]), green(data[i+1]), blue(data[i+2]), alpha(data[i+3])`排列。故在取資料時須每個`rgba`組一起處理`(i+=4)`。
+其实只是处理RGB的像素，输入的`pixels.data[]`数组内分別以`red(data[i]), green(data[i+1]), blue(data[i+2]), alpha(data[i+3])`排列。故`i+=4`。
 
-##### redEffect()
+##### 1. redEffect()
 
- - 把red的項目加深處理，藍綠的項目-50及減半。
+ - 把red的项目加深处理，蓝绿的项目分别-50和减半。
 
 ```javascript
 function redEffect(pixels) {
@@ -142,25 +147,25 @@ function redEffect(pixels) {
 }
 ```
 
-並在`paintToCanvas()`內取`ImageData`之後加入使效果即可。
+在`paintToCanvas()`内获取`ImageData`加入。
 
 ```
 return setInterval(() => {
 		ctx.drawImage(video, 0, 0, width, height);
-		//take the pixels out
+		//取出像素
 		let pixels = ctx.getImageData(0, 0, width, height);
 
-		//mess with them
+		//特效
 		 pixels = redEffect(pixels);
 
-		//put them back
+		//取回
 		ctx.putImageData(pixels, 0, 0);
 	}, 16);
 ```
 
-##### rgbSplit()
+##### 2. rgbSplit()
 
-- 同理redEffect()，這邊是把rgb像素分離。
+- 将rgb像素分离。
 
 ```javascript
 function rgbSplit(pixels) {
@@ -173,9 +178,12 @@ function rgbSplit(pixels) {
 }
 ```
 
-同樣的需要在`paintToCanvas()`內取`ImageData`之後加入使效果即可。
+同样在`paintToCanvas()`内获取`ImageData`加入。
 
-最後是greenScreen，在實作時須先解除html內的註解。可以看到六個`range` bar。分別代表rgb的數值。
+
+##### 3. greenScreen()
+
+- 最后是greenScreen，先取消html内注释部分。可以看到六個`range` bar。分別代表rgb的数值。
 
 ```javascript
 function greenScreen(pixels) {
@@ -194,7 +202,7 @@ function greenScreen(pixels) {
     if (red >= levels.rmin
       && green >= levels.gmin
       && blue >= levels.bmin) {
-      // take it out!
+      // 取出
       pixels.data[i + 3] = 0;
     }
   }
@@ -202,9 +210,9 @@ function greenScreen(pixels) {
 }
 ```
 
-> 今日內容比較特別，可能需要多花時間消化吸收。大家加油~
+> 
 >
-> 一樣附上完整程式碼內容
+>完整代码
 
 ```javascript
 const video = document.querySelector('.player');
