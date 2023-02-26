@@ -13,11 +13,11 @@
 3. 针对jerky jump进行处理。
 4. 加入css动画效果修正。
 
-> 01. 比较数值：scrollY vs topOfNav
+> 01.比较数值：scrollY vs topOfNav
 
 
-- `window.scrollY`:已經scroll的距离。
-- `element.offsetTop`:元素顶部的距離。
+- `window.scrollY`：已经scroll的距离。
+- `element.offsetTop`：元素顶部的距離。
 
 ```javascript
   const nav = document.querySelector('#main'); //获取nav
@@ -34,7 +34,7 @@
 `topOfNav`会固定不变，`window.scrollY` 随scroll变化。
 
 
->02. 修改Css效果。
+>02.修改Css效果。
 
 修改`fixNav function`，若高度超过，则在`body`新增`fixed-nav` 的class，反之移除。
 
@@ -57,7 +57,7 @@ body.fixed-nav nav {
 ```
 
 
->03. 针对jerky jump进行处理。
+>03.针对jerky jump进行处理。
 
 
 当nav被固定时会出现一个问题，因为是对nav 下fixed ，所以nav会脱离原本的文档，造成下方的元素往上走(jerky jump)，所以需要在文档内加入空白，让不要往上跳跃。
@@ -78,7 +78,7 @@ body.fixed-nav nav {
 跳动消失(被padding取代)。
 
 
->04. 加入css动画效果修正。
+>04.加入css动画效果修正。
 
 ```css
 // fixed-nav时 logo跳出，在li.logo内定义了动画的时间(transition:all 0.2s)
