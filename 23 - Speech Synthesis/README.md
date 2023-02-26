@@ -33,8 +33,8 @@
   - `speechSynthesis.cancel()`：取消说话。
   - `speechSynthesis.pause`：暂停说话。
   - `speechSynthesis.resume()`：暂停状态的重新说话。
-  - `speechSynthesis.getVoices()`：获取所有`SpeechSynthesisVoice`声音对象。
-    - `SpeechSynthesisVoice`声音对象包含`lang`, `name`等属性。
+  - `speechSynthesis.getVoices()`：获取所有`SpeechSynthesisVoice`支持的语言对象。
+    - `SpeechSynthesisVoice`语言对象包含`lang`, `name`等属性。
 
   监听事件`voiceschanged`：
 
