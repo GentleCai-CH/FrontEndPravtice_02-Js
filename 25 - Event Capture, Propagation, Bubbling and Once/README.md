@@ -2,13 +2,9 @@
 
 ## 摘要
 
-今天要介紹的是觀念的理解:
+本篇介绍DOM事件的机制:Event Capture(事件捕捉), Event Bubbling(事件冒泡), Propagation, 及Once(单次执行)。
 
-關於DOM事件的機制:Event Capture(事件捕捉), Event Bubbling(事件冒泡), Propagation, 及Once(單次執行)。
-
-## 內容
-
-我們先了解`html`的設置
+## 重点
 
 ```html
   <div class="one">
@@ -19,7 +15,7 @@
   </div>
 ```
 
-這邊有共三層的div標籤。首先我們先為這三個標籤加入`click`的監聽事件。
+这里有3层div。首先都加入`click`监听。
 
 ```javascript
   const divs = document.querySelectorAll('div');
@@ -31,11 +27,11 @@
   divs.forEach(div => div.addEventListener('click', logText));
 ```
 
-元素的註冊事件的方法，其實有三個參數。
+元素的监听注册`.addEventListener()`有三个参数。
 
-`EventTarget.addEventListener('eventName', callback, option)`:分別為事件名稱，該事件的回調涵式(監聽器)，及註冊的選項對象(option)。
+`EventTarget.addEventListener('eventName', callback, option)`:分別为事件类型，处理回调，及选项(option)。
 
-option內有兩個屬性，`capture`及`once`預設皆為`false`。
+option内有两个属性`capture`及`once`默认为`false`。
 
 ```javascript
 divs.forEach(div => div.addEventListener('click', logText, {
@@ -44,9 +40,10 @@ divs.forEach(div => div.addEventListener('click', logText, {
 }));
 ```
 
-接著我們點擊最內圈的`div`，會發現依序會出現three, two, one。
+点击最里面的`div`，会依次出现three, two, one。
 
-當我們註冊一個監聽器時，會**由外向內**的去［捕捉］(Capture)這個監聽器的位置，而當位置被觸發時，會**由內向外**去［冒泡］(bubbling)。而預設option內的`capture`選項為`false`，也就是代表我們不去處理［捕捉］的過程，只處理［冒泡的過程］。所以會看到呈現方式會式`three->two->one`。
+注册一个监听器时，会**由外向内**[捕捉](Capture)监听器的位置，
+而当位置被触发时，会**由内向外**［冒泡］(bubbling)。而預設option內的`capture`選項為`false`，也就是代表我們不去處理［捕捉］的過程，只處理［冒泡的過程］。所以會看到呈現方式會式`three->two->one`。
 
 ```javascript
   const divs = document.querySelectorAll('div');
