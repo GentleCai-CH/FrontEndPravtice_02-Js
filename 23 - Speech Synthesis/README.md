@@ -2,44 +2,43 @@
 
 ## 摘要
 
-今日要使用`SpeechSynthesisUtterance`物件，透過可以驅動瀏覽器說話的API`speechSynthesis`，來實作類似google小姐的說話(utterance)功能，包含講話速度(rate)及音頻(pitch)的高低。
+本篇通过触发浏览器的语音合成API`speechSynthesis`，实现类似google小姐的说话(utterance)功能，包含语音速度(rate)及音频高低(pitch)。
 
-## 內容
+## 重点
+ 处理流程：
 
- 處理流程：
-
-1. 匯入API 提供的語言選單。
-2. 設定所選語言為說話的語言。
-3. 監聽rate 及 pitch 更動，並切換重新說話。 
-4. 透過start 及 stop 按鈕開啟及結束說話。
-
+1. 引入API 提供的语言选单。
+2. 设定所选语言为说话的语言。
+3. 监听rate 及 pitch ，并切换重新说话。 
+4. 通过start 及 stop 按钮启动及结束说话。
 
 
->匯入API 提供的語言選單。
 
-- 首先先建立`let utterance = new SpeechSynthesisUtterance()`物件。物件內容包括：[詳見](https://developer.mozilla.org/zh-TW/docs/Web/API/SpeechSynthesisUtterance)
+>01. 引入API 提供的语言选单
 
-  - `utterance.text` : 說話的內容。
-  - `utterance.lang`: 說話的語言。
-  - `utterance.pitch`:說話的音頻。
-  - `utterance.rate`:說話的速度。
-  - `utterance.voice`:說話的聲音。
-  - `utterance.volume`:說話的音量。
+- 首先创建语音合成对象实例`let utterance = new SpeechSynthesisUtterance()`。[详见](https://developer.mozilla.org/zh-TW/docs/Web/API/SpeechSynthesisUtterance)
 
-- 接著可以利用`speechSynthesis`操作`SpeechSynthesisUtterance()`物件。
+  - `utterance.text` : 说话的文本。
+  - `utterance.lang`: 说话的语言。
+  - `utterance.pitch`:说话的音频。
+  - `utterance.rate`:说话的速度。
+  - `utterance.voice`:说话的声音。
+  - `utterance.volume`说话的音量。
+
+- 然后利用`speechSynthesis`操作`SpeechSynthesisUtterance()`对象实例。
 
   方法：
 
-  - `speechSynthesis.speck()`:說話。
-  - `speechSynthesis.cancel()`取消說話。
-  - `speechSynthesis.pause`:暫停說話。
-  - `speechSynthesis.getVoices()`:取的所有`SpeechSynthesisVoice`語音物件。
-    - `SpeechSynthesisVoice`物件包含`lang`, `name`等屬性。
-  - `speechSynthesis.resume()`:讓暫停的重啟。
+  - `speechSynthesis.speck()`：开始说话。
+  - `speechSynthesis.cancel()`：取消说话。
+  - `speechSynthesis.pause`：暂停说话。
+  - `speechSynthesis.resume()`：暂停状态的重新说话。
+  - `speechSynthesis.getVoices()`：获取所有`SpeechSynthesisVoice`声音对象。
+    - `SpeechSynthesisVoice`声音对象包含`lang`, `name`等属性。
 
-  監聽事件：
+  监听事件`voiceschanged`：
 
-  `speechSynthesis.onvoicechanged`:若語言改變(`speechSynthesis.getVoices`)時驅動。
+  `speechSynthesis.onvoicechanged`:语言改变时触发(`speechSynthesis.getVoices`)。
 
 ```javascript
   msg.text = document.querySelector('[name="text"]').value;
@@ -55,11 +54,11 @@
   speechSynthesis.addEventListener('voiceschanged', populateVoices);
 ```
 
-此時可以看到選取欄位內有全部的語言。
+此时可以看到选取栏内所有语言。
 
->  設定所選語言為說話的語言。
+>02. 设定所选语言为说话的语言。
 
-- 設定一個`toggle`方法，當做驅動說話的開關。
+- 定义一个`toggle`方法，切换说话开关。
 
 ```javascript
   function setVoice(){
@@ -77,13 +76,13 @@
   voicesDropdown.addEventListener('change', setVoice);
 ```
 
-此時若重新選取語言應該會發出對話。
+此时重选语言会发出语音。
 
-> 監聽rate 及 pitch 更動，並切換重新說話。 
+>03. 监听rate 及 pitch的`change`事件，并重新说话。 
 
 `const options = document.querySelectorAll('[type="range"], [name="text"]');`
 
-options的選取總共有三個，名稱為`rate`, `pitch`及`text`，剛好和`SpeechSynthesisUtterance`物件的屬性符合，所以可以監聽後插入改變的數值，並執行`toggle`。
+options内有三个元素，分别为`rate`, `pitch`及`text`，刚好和`SpeechSynthesisUtterance`的属性符合，所以可以监听后传入改变的值，并执行`toggle`。
 
 ```javascript
   function setOption() {
@@ -95,53 +94,50 @@ options的選取總共有三個，名稱為`rate`, `pitch`及`text`，剛好和`
   options.forEach(option => option.addEventListener('change', setOption));
 ```
 
-此時應該可以藉由切換rate, pitch, text 後聽到聲音發出。
 
->透過start 及 stop 按鈕開啟及結束說話。
+>04.通过start 及 stop 按钮开启及结束说话。
 
-當我們在處理事件監聽綁定函數需要參數時**無法**直接在函數內帶入參數如
+事件处理函數需要参数时**不能直接传入参数**，如：
 
 `speakButton.addEventListener('click', toggle(false));//x`
 
- 若要帶入參數可參考以下作法
+ 若要传入参数可参考以下作法
 
 ```javascript
-speakButton.addEventListener('click', ()=>toggle(false)); //用匿名函數
-speakButton.addEventListener('click', toggle.bind(null, false));//透過為回調函數帶入參數。
+speakButton.addEventListener('click', ()=>toggle(false)); //用匿名函数
+speakButton.addEventListener('click', toggle.bind(null, false));//通过`.bind()`方法
 ```
 
 
 
 ```javascript
-  speakButton.addEventListener('click', toggle);//開
-  stopButton.addEventListener('click', () => toggle(false));//觀
+  speakButton.addEventListener('click', toggle);//开
+  stopButton.addEventListener('click', () => toggle(false));//关
 ```
 
-> 最後若想要在選取語言時只顯示英文
+>05.改进：语言选取栏只显示英文
 
-- 利用`.filter()`及`includes('arg')`即可
+- 用`.filter()`及`includes('arg')`即可
 
 ```javascript
 voicesDropdown.innerHTML = voices.
       .filter(voice => voice.lang.includes('en'))
-      map(voice => `<option value="${voice.name}">${voice.name} (${voice.lang})</option>`)
+      .map(voice => `<option value="${voice.name}">${voice.name} (${voice.lang})</option>`)
       .join('');
 ```
 
-> 今日練習就到此為止。
->
-> 另附上完整程式碼
+> 完整代码
 
 ```javascript
 <script>
-  // 創立SpeechSynthesisUtterance物件
+  // 创建SpeechSynthesisUtterance对象
   const msg = new SpeechSynthesisUtterance();
   let voices = [];
   const voicesDropdown = document.querySelector('[name="voice"]');
   const options = document.querySelectorAll('[type="range"], [name="text"]');
   const speakButton = document.querySelector('#speak');
   const stopButton = document.querySelector('#stop');
-  //設定text為說話範本
+  //设置text为说话文本
   msg.text = document.querySelector('[name="text"]').value;
 
   function populateVoices() {
@@ -158,7 +154,7 @@ voicesDropdown.innerHTML = voices.
     toggle();
   }
 
-  //作為開關, 預設帶入為true
+  //开关, 预设为true
   function toggle(startOver = true){
     speechSynthesis.cancel();
     if (startOver) {
