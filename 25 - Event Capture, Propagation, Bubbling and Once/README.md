@@ -2,7 +2,7 @@
 
 ## 摘要
 
-本篇介绍DOM事件的机制:Event Capture(事件捕捉), Event Bubbling(事件冒泡), Propagation, 及Once(单次执行)。
+本篇介绍DOM事件的机制:Event Capture(事件捕捉), Event Bubbling(事件冒泡), Propagation（传播）, 及Once(单次执行)。
 
 ## 重点
 
