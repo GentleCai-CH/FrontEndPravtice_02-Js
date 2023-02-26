@@ -6,6 +6,7 @@
 
 ## 重点
 
+>01.注册监听
 ```html
   <div class="one">
     <div class="two">
@@ -42,8 +43,10 @@ divs.forEach(div => div.addEventListener('click', logText, {
 
 点击最里面的`div`，会依次出现three, two, one。
 
-注册一个监听器时，会**由外向内**[捕捉](Capture)监听器的位置，
-而当位置被触发时，会**由内向外**［冒泡］(bubbling)。而預設option內的`capture`選項為`false`，也就是代表我們不去處理［捕捉］的過程，只處理［冒泡的過程］。所以會看到呈現方式會式`three->two->one`。
+>02.捕获和冒泡
+- 注册一个监听器时，会**由外向内**[捕捉](Capture)监听器的位置，
+- 而当位置被触发时，会**由内向外**［冒泡］(bubbling)。
+- `capture`默认为`false`，表示不处理［捕捉过程]，只处理［冒泡过程］。
 
 ```javascript
   const divs = document.querySelectorAll('div');
@@ -60,7 +63,7 @@ divs.forEach(div => div.addEventListener('click', logText, {
 
 
 
-而當我們把`capture`設定為true時，則不會執行［冒泡］程序，所以會看到呈現會式`one->two->three`。
+将`capture`设为true时，则不会执行［冒泡过程］，所以会返回`one->two->three`。
 
 ```javascript
   const divs = document.querySelectorAll('div');
@@ -77,7 +80,7 @@ divs.forEach(div => div.addEventListener('click', logText, {
 
 
 
-而當我們無論在bubbling或是capture的過程中加入了`e.stopPropagation();`時，會中斷過程。若`capture`為`ture`, 則只會看到one；同理若為`false`，則只會看到`three`。
+而加入了`e.stopPropagation();`时，会中断过程。若`capture`为`ture`, 则只会返回one；若为`false`，则只会返回`three`。
 
 ```javascript
   const divs = document.querySelectorAll('div');
@@ -94,7 +97,7 @@ divs.forEach(div => div.addEventListener('click', logText, {
 }));
 ```
 
-而`once`則是代表這個事件監聽只執行一次，執行完後即會`removeEventListener`。因此當`once : true`時，只會執行一次監聽事件。
+而`once`表示监听器只执行一次监听事件，执行完后`removeEventListener`。
 
 ```javascript
   button.addEventListener('click', () => {
@@ -104,11 +107,9 @@ divs.forEach(div => div.addEventListener('click', logText, {
   });
 ```
 
-此時應該可以看到點擊按鈕後只會出現一次`Click!!!`。
+点击按钮后只会出现一次`Click!!!`。
 
->今天的練習到這邊結束。
-
-附上完整的程式碼
+>完整代码
 
 ```javascript
   const divs = document.querySelectorAll('div');
